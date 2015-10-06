@@ -83,9 +83,7 @@ DATABASES = {
         'USER': os.getenv('DB_USER', 'root'),
         'PASSWORD': os.getenv('DB_PASSWORD', ''),
         'HOST': os.getenv('DB_HOST', 'localhost'),
-        'OPTIONS': {
-          'autocommit': True,
-        },
+        'OPTIONS': {'autocommit': True, },
     }
 }
 
