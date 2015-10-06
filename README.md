@@ -16,4 +16,7 @@
    `$ mkvirtualenv -p python3.4 capstone-project`
 
 
-
+#### MySQL Database
+  1. Create a local capitalonecapstone database 
+  	'$ mysql -u root'
+  	'$ create database capitalonecapstone'
