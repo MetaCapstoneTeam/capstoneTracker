@@ -11,8 +11,8 @@ def project_list(request):
 
 
 def project_details(request, project_id):
-	"""Show the details of a project"""
-	context = {}
-	project = Project.objects.get(id=project_id)
-	context['project'] = project
-	return render(request, 'project_details.html', context)
+    """Show the details of a project."""
+    context = {}
+    project = Project.objects.get(id=project_id)
+    context['project'] = project
+    return render(request, 'project_details.html', context)
