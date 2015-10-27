@@ -5,7 +5,7 @@
         <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Amanda Jensen</title>
+        <title>Capstone Tracker</title>
 </head>
 
 <body>
@@ -16,7 +16,27 @@
                 <div id = "register">
                 </div>
         </div>
+        <div id="container">
+                <form>
+                    <span style="float:left; padding-left:383px;">
+                    <h3><font color="grey"><strong> Login </strong></font></h3>
+                    <label class="labelClass" for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                    <div id="lower">
+                        <label class="labelClass" for="password">Password:</label>
+                        <input type="password" id="password" name="password"></br>
+                        <label class="labelClass" for="log_typ">User Type:</label> <select name="login_t">
+                            <option value="student">Student</option>
+                            <option value="employee">Employee</option>
+                        </select>
+                    </div>
+                    <div id="lower">
+                        <input type="submit" value="Login">
+                    </div>
+                    </span>
+                </form>
+        </div>
 </div>
-<div id = "footer"><a href = "admin" class = "login"> Login </a> | <a href = "admin" class = "login" style = "padding-right: 10px"> Register </a>  </div>
+<div id = "footer"><a href = "admin" class = "login" style = "padding-right: 10px"> Register </a>  </div>
 </body>
 </html>

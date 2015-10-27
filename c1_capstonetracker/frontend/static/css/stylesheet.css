@@ -124,3 +124,17 @@ h1{
 	width: 20%;
         height: 20%;
 }
+
+#form{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+
+    .labelClass{
+        float:left;
+        width:80px;
+        text-align:left;
+        padding-right:10px;
+    }
