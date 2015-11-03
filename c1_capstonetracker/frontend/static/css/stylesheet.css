@@ -118,12 +118,12 @@ h1{
 
 #marker{
 	width: 1.5%;
-        height: 1.5%;
+  height: 1.5%;
 }
 
 #pic{
 	width: 20%;
-        height: 20%;
+  height: 20%;
 }
 #form{
   margin-right: auto;
@@ -144,4 +144,18 @@ h1{
   margin-bottom: 5px;
   padding: 0;
   position: relative;
+}
+
+#navigation_menu{
+  background-color: white;
+  display: block;
+  position: inherit;
+}
+
+#menu_item{
+  display: inline-block;
+  outline-color: black;
+
+  font-family: 'Syncopate', sans-serif;
+  font-size: 20px;
 }
