@@ -98,6 +98,7 @@ text-decoration:underline;
   padding-top: 10px;
 }
 
+
 h1{
 	/*font-family: 'Titillium Web', sans-serif; */
 	font-family: 'Maven Pro', sans-serif;
@@ -123,4 +124,14 @@ h1{
 #pic{
 	width: 20%;
         height: 20%;
+}
+
+#user_info {
+  display: block;
+  float: right;
+  margin: 0;
+  margin-left: 1.5%;
+  margin-bottom: 5px;
+  padding: 0;
+  position: relative;
 }

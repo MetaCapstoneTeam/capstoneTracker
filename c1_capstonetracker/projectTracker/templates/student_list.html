@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+{% load tz %}
+{% block content %}
+
+<h1>All Students</h1>
+
+<table border=1>
+    <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>School</th>
+            <th>Major</th>
+            <th>Project </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.last_name }},{{ student.first_name }}</td>
+            <td>{{ student.school.name }}</td>
+            <td>{{ student.major }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>    
+</table>
+
+{% endblock %}

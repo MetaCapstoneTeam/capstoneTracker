@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load tz %}
+{% block content %}
+
+<h1>Home Page </h1>
+
+<h2><a href="{% url "project_list" %}"/> Projects </h2>
+<h2><a href="{% url "student_list" %}"/> Students </h2>
+
+
+
+{% endblock %}

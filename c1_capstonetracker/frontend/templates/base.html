@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head> 
+	 <link rel="icon" href="aj_icon.ico" type="image/ico"/>
+        <link rel="stylesheet" href="../static/css/stylesheet.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Capital One Capstone</title>
+</head>
+
+<body>
+	<div id = 'user_info'>
+		<img src="../static/img/filler_pic.png">
+		<p>Hello, Amanda </p>
+	</div>
+	<div id = 'navigation_menu'>
+		
+		
+	</div>
+
+	 <div id='content'>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="success"><p><span class="ui-icon ui-icon-check" style="float: left; margin-right: .3em;"></span><strong>Success:</strong> {{ message }}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}
+            {% endblock %}
+    	</div>
+
+</body>
+
+</html>
