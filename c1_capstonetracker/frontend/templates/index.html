@@ -8,10 +8,10 @@
         <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Capital One Capstone</title>
+        <title>Log In</title>
 </head>
 
-<body>
+<body id="login_page">
 
 <div id ="wrapper">
         <div id = "mini-wrapper">
@@ -21,22 +21,23 @@
                 </div>
         </div>
         <div id="container">
-                <form>
+                {{ state }}
+                <form  action="/login/" method="post">
+                    {% csrf_token %}
                     <span style="float:left; padding-left:383px;">
                     <h3><font color="grey"><strong> Login </strong></font></h3>
                     <label class="labelClass" for="username">Username:</label>
-                    <input type="text" id="username" name="username">
+                    <input type="text" id="username" name="username" value="{{ username }}">
                     <div id="lower">
                         <label class="labelClass" for="password">Password:</label>
                         <input type="password" id="password" name="password"></br>
-                        <label class="labelClass" for="log_typ">User Type:</label> <select name="login_t">
+                        <label class="labelClass" for="log_type">User Type:</label> <select name="login_t">
                             <option value="student">Student</option>
                             <option value="employee">Employee</option>
                         </select>
                     </div>
                     <div id="lower">
-                        <input type="submit" value="Login" >
-                        <a href = "{% url "home_page" %}" class = "login"> Login </a>
+                        <input type="submit" value="Log In" />
                     </div>
                     </span>
                 </form>

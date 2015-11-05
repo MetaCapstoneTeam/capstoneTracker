@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
 
 from .forms import EmployeeForm, SchoolForm
 from .models import Employee, Project, School, Student
@@ -73,3 +75,37 @@ def add_employee(request):
     else:
         context['form'] = EmployeeForm()
     return render(request, 'add_employee.html', context)
+
+
+def login_user(request):
+    """Check the credential of the user logging in."""
+    username = password = ''
+    state = "Log In"
+    context = {}
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                state = ""
+            else:
+                state = "Your account is not active, contact the admin. "
+        else:
+            state = "Your username and/or password were incorrect."
+
+    context["state"] = state
+    context["username"] = username
+    if state == "":
+        return redirect('home_page')
+    else:
+        return render(request, 'index.html', context)
+
+
+def user_profile(request):
+    """Show the profile of a user."""
+    context = {}
+    user = User.objects.get(id=request.user.id)
+    context['user'] = user
+    return render(request, 'user_profile.html', context)

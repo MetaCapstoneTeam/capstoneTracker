@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', include('frontend.urls', namespace='frontend',
         app_name='frontend')),
     url(r'^projectTracker/', include('projectTracker.urls')),
+    url(r'^login/$', 'projectTracker.views.login_user'),
 ]
