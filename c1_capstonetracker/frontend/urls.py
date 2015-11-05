@@ -15,9 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import index, home_page
+from .views import index
 
 urlpatterns = [
     url(r'^$', index, name='home'),
-    url(r'^$', home_page, name='home_page')
 ]

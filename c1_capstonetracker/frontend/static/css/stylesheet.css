@@ -137,13 +137,11 @@ h1{
 }
 
 #user_info {
-  display: block;
   float: right;
   margin: 0;
   margin-left: 1.5%;
   margin-bottom: 5px;
   padding: 0;
-  position: relative;
 }
 
 #navigation_menu{

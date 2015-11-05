@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from .models import Project, Student
+from .forms import EmployeeForm, SchoolForm
+from .models import Employee, Project, School, Student
 
 
 def home_page(request):
@@ -23,8 +24,52 @@ def project_details(request, project_id):
     return render(request, 'project_details.html', context)
 
 
+def school_list(request):
+    """Show the list of Schools."""
+    context = {}
+    context['schools'] = School.objects.all()
+    return render(request, 'school_list.html', context)
+
+
 def student_list(request):
     """Show the list of Students."""
     context = {}
     context['students'] = Student.objects.all()
     return render(request, 'student_list.html', context)
+
+
+def employee_list(request):
+    """Show the list of employees."""
+    context = {}
+    context['employees'] = Employee.objects.all()
+    return render(request, 'employee_list.html', context)
+
+
+def add_school(request):
+    """Add school."""
+    context = {}
+    if request.method == 'POST':
+        form = SchoolForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'home_page.html', context)
+        else:
+            context['form'] = form
+    else:
+        context['form'] = SchoolForm()
+    return render(request, 'add_school.html', context)
+
+
+def add_employee(request):
+    """Add employee."""
+    context = {}
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'home_page.html', context)
+        else:
+            context['form'] = form
+    else:
+        context['form'] = EmployeeForm()
+    return render(request, 'add_employee.html', context)
