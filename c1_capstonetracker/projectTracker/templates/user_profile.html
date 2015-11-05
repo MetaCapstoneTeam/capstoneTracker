@@ -3,8 +3,12 @@
 {% load tz %}
 {% block content %}
 
+{% for user in users %}
+
 <h1>{{ user }}</h1>
 <h2>{{ user.email }} </h2>
+
+{% endfor %}
 
 
 {% endblock %}

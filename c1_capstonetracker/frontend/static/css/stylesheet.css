@@ -42,14 +42,6 @@
 }
 
 
-a{
-text-decoration:none;
-color: #000;
-}
-
-a:hover{
-text-decoration:underline;
-}
 
 
 h1{
@@ -91,6 +83,10 @@ h1{
   display: inline-block;
 }
 
+body{
+  background-color: gray;
+}
+
 #user_info {
   float: right;
   font-family: 'Syncopate', sans-serif;
@@ -115,4 +111,13 @@ h1{
   outline-color: black;
   font-family: 'Syncopate', sans-serif;
   font-size: 20px;
+}
+
+#menu_item a {
+  text-decoration:none;
+  color: #000;
+}
+
+#menu_item:hover{
+  background-color: white;
 }

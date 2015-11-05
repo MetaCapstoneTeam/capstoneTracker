@@ -20,28 +20,36 @@
 
 		  <img src='{% static 'img/filler_pic.png' %}'>Hello {{ user.username }} 
 	   </div>
-       {{ state }}
     </div>
 
 	<div id = 'navigation_menu'>
 		<div id = 'menu_item'>
-            <a href="{% url "home_page" %}"/> Home 
+            <a href="{% url "home_page" %}"> Home </a>
         </div>
         <div id = 'menu_item'>
-            <a href="{% url "student_list" %}"/> Students
+            <a href="{% url "student_list" %}"> Students</a>
         </div>
         <div id = 'menu_item'>
-            <a href="{% url "employee_list" %}"/> Employees
+            <a href="{% url "employee_list" %}"> Employees</a>
         </div>
         <div id = 'menu_item'>
-            <a href="{% url "school_list" %}"/> Schools
+            <a href="{% url "school_list" %}"> Schools</a>
         </div>
         <div id = 'menu_item'>
-            <a href="{% url "user_profile" %}"/> Profile
+            <a href="{% url "project_list" %}"> Projects</a>
+        </div>
+        <div id = 'menu_item'>
+            <a href="{% url "add_employee" %}"> Add Employee</a>
+        </div>
+        <div id = 'menu_item'>
+            <a href="{% url "add_school" %}"> Add School</a>
+        </div>
+        <div id = 'menu_item'>
+            <a href="{% url "user_profile" %}"> Profile</a>
         </div>
 	</div>
 
-	 <div id='content'>
+	<div id='content'>
         {% block content %}
         {% endblock %}
     </div>

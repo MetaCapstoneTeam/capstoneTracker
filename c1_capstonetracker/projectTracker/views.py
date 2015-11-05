@@ -69,7 +69,7 @@ def add_employee(request):
         form = EmployeeForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'home_page.html', context)
+            return render(request, 'user_profile.html', context)
         else:
             context['form'] = form
     else:
@@ -106,6 +106,6 @@ def login_user(request):
 def user_profile(request):
     """Show the profile of a user."""
     context = {}
-    user = User.objects.get(id=request.user.id)
-    context['user'] = user
+    user = User.objects.all()
+    context['users'] = user
     return render(request, 'user_profile.html', context)
