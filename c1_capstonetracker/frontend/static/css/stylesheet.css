@@ -93,6 +93,11 @@ body{
   color: #fff;
 }
 
+#username{
+  display: inline-block;
+  font-family: 'Maven Pro', sans-serif;
+}
+
 #navigation_menu{
   margin-bottom: 20px;
   text-align: center;

@@ -71,6 +71,8 @@ def add_employee(request):
         userform = UserForm(request.POST)
         if form.is_valid():
             new_user = User.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
+            new_user.first_name = request.POST['first_name']
+            new_user.last_name = request.POST['last_name']
             new_user.save()
             form.save()
             return render(request, 'home_page.html', context)
@@ -114,6 +116,7 @@ def user_profile(request):
     context = {}
     user = request.user
     context['user'] = user
+    
     # if  Employee.objects.get(email=user.email) != doesnotexists:
         # context['user'] = empl
     
