@@ -17,9 +17,9 @@
             <img src = "{% static 'img/capitalone-logo-white-small.png' %}">
         </div>
         <div id='user_info'>
-
 		  <img src='{% static 'img/filler_pic.png' %}'>Hello {{ user.username }} 
 	   </div>
+
     </div>
 
 	<div id = 'navigation_menu'>
@@ -46,6 +46,9 @@
         </div>
         <div id = 'menu_item'>
             <a href="{% url "user_profile" %}"> Profile</a>
+        </div>
+        <div id = 'menu_item'>
+            <a href="{% url "logout_user" %}"> Log Out</a>
         </div>
 	</div>
 

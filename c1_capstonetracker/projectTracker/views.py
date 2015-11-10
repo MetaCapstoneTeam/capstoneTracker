@@ -1,9 +1,10 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
-from .forms import EmployeeForm, SchoolForm
+from .forms import EmployeeForm, SchoolForm, UserForm
 from .models import Employee, Project, School, Student
+
 
 
 def home_page(request):
@@ -67,45 +68,53 @@ def add_employee(request):
     context = {}
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
+        userform = UserForm(request.POST)
         if form.is_valid():
+            new_user = User.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
+            new_user.save()
             form.save()
-            return render(request, 'user_profile.html', context)
+            return render(request, 'home_page.html', context)
         else:
             context['form'] = form
+            context['userForm'] = userform
     else:
         context['form'] = EmployeeForm()
+        context['userForm'] = UserForm()
     return render(request, 'add_employee.html', context)
 
 
 def login_user(request):
     """Check the credential of the user logging in."""
     username = password = ''
-    state = "Log In"
+    state = ""
     context = {}
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
+        login_type = request.POST.get('login_t')
+        print(login_type)
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                state = ""
+                return redirect('home_page')
             else:
                 state = "Your account is not active, contact the admin. "
         else:
             state = "Your username and/or password were incorrect."
-
-    context["state"] = state
-    context["username"] = username
-    if state == "":
-        return redirect('home_page')
-    else:
         return render(request, 'index.html', context)
 
+
+def logout_user(request):
+    logout(request)
+    return render(request,'index.html')
 
 def user_profile(request):
     """Show the profile of a user."""
     context = {}
-    user = User.objects.all()
-    context['users'] = user
+    user = request.user
+    context['user'] = user
+    # if  Employee.objects.get(email=user.email) != doesnotexists:
+        # context['user'] = empl
+    
     return render(request, 'user_profile.html', context)
