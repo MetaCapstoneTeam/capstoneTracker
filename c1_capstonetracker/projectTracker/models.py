@@ -48,7 +48,7 @@ class Student(models.Model):
 class Employee(models.Model):
 
     """Employee - Information about a Employee."""
-
+    
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
     email = models.EmailField()
