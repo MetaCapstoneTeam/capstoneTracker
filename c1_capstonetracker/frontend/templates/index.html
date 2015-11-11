@@ -18,27 +18,25 @@
                 <img src = "../static/img/capitalone-logo-white.png">
                 <h1> Capstone Tracker </h1>
                 <div id = "register">
+
                 </div>
         </div>
+
         <div id="container">
                 {{ state }}
                 <form  action="/login/" method="post">
                     {% csrf_token %}
-                    <span style="float:left; padding-left:383px;">
-                    <label class="labelClass" for="username">Username:</label>
-                    <input type="text" id="username" name="username" value="{{ username }}">
-                    <div id="lower">
-                        <label class="labelClass" for="password">Password:</label>
-                        <input type="password" id="password" name="password"></br>
-                        <label id ='lower', class="labelClass" for="log_type">User Type:</label> <select id ='lower', name="login_t">
+                    <input type="text" placeholder="Username" id="username" name="username" value="{{ username }}">
+                    <div>
+                        <input type="password" placeholder="Password" id="password" name="password"></br>
+                        <select id ='lower', name="login_t">  <option value="" disabled selected> <u> User Type </u> </option>
                             <option value="student">Student</option>
                             <option value="employee">Employee</option>
                         </select>
                     </div>
-                    <div id="lower", align = 'center'>
-                        <input type="submit" value="Log In" />
+                    <div>
+                        <input type="submit" value="Log In >" />
                     </div>
-                    </span>
                 </form>
         </div>
 </div>
