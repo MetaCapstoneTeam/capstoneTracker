@@ -2,14 +2,21 @@
 
 {% load tz %}
 {% block content %}
-
-<h1 align = 'center'>All Projects</h1>
-
+<div id ="content-wrapper">
+<table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
+    <td> </td> <td><a href="{% url "add_employee" %}"> + Add </a></td></table>
 <table align = 'center',border=1>
+    <colgroup>
+    <col width="25%">
+    <col width="25%">
+    <col width="25%">
+    <col width="25%">
+    </colgroup>
     <thead>
         <tr>
             <th>Project Name</th>
             <th>Project Description</th>
+             <th>School</th>
             <th>Project Team</th>
         </tr>
     </thead>
@@ -23,5 +30,6 @@
         {% endfor %}
     </tbody>    
 </table>
+</div>
 
 {% endblock %}
