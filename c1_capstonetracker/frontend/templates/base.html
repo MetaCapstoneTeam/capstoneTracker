@@ -11,47 +11,45 @@
         <title>Capital One Capstone</title>
 </head>
 
-<body>
-    <div id='header'>
-        <div id='logo_image'>
-            <img src = "{% static 'img/capitalone-logo-white-small.png' %}">
-        </div>
-        <div id='user_info'>
-		  <img src='{% static 'img/filler_pic.png' %}'/>
-          <div id='username'>Hello {{ user.first_name }} </div>
-	   </div>
-
+<body class="news">
+  <header>
+      <div class='header'>
+        <div id = 'logout'>
+            <a href="{% url "user_profile" %}"> My Profile </a> |
+            <a href="{% url "logout_user" %}"> Logout </a></div>
     </div>
-
-	<div id = 'navigation_menu'>
-		<div id = 'menu_item'>
-            <a href="{% url "home_page" %}"> Home </a>
+    <div class ='header'>
+        <div id='logo_image'>
+            <img src = "{% static 'img/capitalone-logo-white-small.png' %}"></br>
+            <h1> Capstone Tracker </h1>
         </div>
-        <div id = 'menu_item'>
-            <a href="{% url "student_list" %}"> Students</a>
-        </div>
-        <div id = 'menu_item'>
-            <a href="{% url "employee_list" %}"> Employees</a>
-        </div>
-        <div id = 'menu_item'>
-            <a href="{% url "school_list" %}"> Schools</a>
-        </div>
-        <div id = 'menu_item'>
-            <a href="{% url "project_list" %}"> Projects</a>
-        </div>
-        <div id = 'menu_item'>
-            <a href="{% url "add_employee" %}"> Add Employee</a>
-        </div>
-        <div id = 'menu_item'>
-            <a href="{% url "add_school" %}"> Add School</a>
-        </div>
-        <div id = 'menu_item'>
-            <a href="{% url "user_profile" %}"> Profile</a>
-        </div>
-        <div id = 'menu_item'>
-            <a href="{% url "logout_user" %}"> Log Out</a>
-        </div>
-	</div>
+    </div>
+    <div class="nav">
+      <ul>
+        
+        <li><a 
+            {% url 'home_page' as home_url %}
+            {% if request.get_full_path == home_url %} class="active" 
+            {% endif %} href="{% url "home_page" %}">Home</a></li>
+        <li> <a 
+            {% url 'student_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "student_list" %}"> Students </a></li>
+        <li><a 
+            {% url 'employee_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "employee_list" %}"> Employees </a></li>
+        <li><a 
+            {% url 'school_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %}  href="{% url "school_list" %}"> Schools</a></li>
+        <li><a
+            {% url 'project_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "project_list" %}"> Projects</a></li>
+      </ul>
+    </div>
+  </header>
 
 	<div id='content'>
         {% block content %}
