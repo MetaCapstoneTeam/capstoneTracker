@@ -26,11 +26,27 @@
     </div>
     <div class="nav">
       <ul>
-        <li><a class="active" href="{% url "home_page" %}">Home</a></li>
-        <li> <a href="{% url "student_list" %}"> Students </a></li>
-        <li><a href="{% url "employee_list" %}"> Employees </a></li>
-        <li><a href="{% url "school_list" %}"> Schools</a></li>
-        <li><a href="{% url "project_list" %}"> Projects</a></li>
+        
+        <li><a 
+            {% url 'home_page' as home_url %}
+            {% if request.get_full_path == home_url %} class="active" 
+            {% endif %} href="{% url "home_page" %}">Home</a></li>
+        <li> <a 
+            {% url 'student_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "student_list" %}"> Students </a></li>
+        <li><a 
+            {% url 'employee_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "employee_list" %}"> Employees </a></li>
+        <li><a 
+            {% url 'school_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %}  href="{% url "school_list" %}"> Schools</a></li>
+        <li><a
+            {% url 'project_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "project_list" %}"> Projects</a></li>
       </ul>
     </div>
   </header>
