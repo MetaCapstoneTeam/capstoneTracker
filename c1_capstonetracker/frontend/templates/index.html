@@ -4,7 +4,7 @@
 
 <head> 
      <link rel="icon" href="aj_icon.ico" type="image/ico"/>
-        <link rel="stylesheet" href="../static/css/stylesheet.css"/>
+        <link rel="stylesheet" href="../static/css/login-style.css"/>
         <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -25,7 +25,6 @@
                 <form  action="/login/" method="post">
                     {% csrf_token %}
                     <span style="float:left; padding-left:383px;">
-                    <h3 align="center"><font color="grey"><strong> Login </strong></font></h3>
                     <label class="labelClass" for="username">Username:</label>
                     <input type="text" id="username" name="username" value="{{ username }}">
                     <div id="lower">

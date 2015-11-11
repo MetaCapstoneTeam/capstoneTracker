@@ -1,167 +1,130 @@
-#login_page { 
-  background-color: #004977; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  font-family: 'Maven Pro', sans-serif;
-  color: #fff;
-}
-
-#wrapper {
-  width: 80%;
-  max-width: 990px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;   
-  padding: 2em;          
-}
-
-#mini-wrapper {
-  margin: 13%;
-  margin-top: 15%;
-  margin-left:0;
-  margin-right: 0;
-  margin-bottom: 15px;
-  text-align: center;  
-  padding-bottom: 0em;
-}
-
-.login {
-  font-size: 12px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: bolder;
-  text-decoration: none;
-
-}
-
-#lower{
-	  padding-top: 7px;
-	  padding-bottom: 7px;
-}
-
-.login:hover {
-  text-decoration: none;
-}
-
-input[type=text],
-input[type=password] {
-    color: #777;
-    padding-left: 7px;
-    /*margin: 10px;
-    margin-top: 12px;
-    margin-left: 18px;*/
-    width: 90px;
-    height: 15px;
-}
-
-select {
-  margin-top: 7px;
-  border: 1px solid #111;
-  width: 90px;
-  font-size: 12px;
-  border: 1px solid #ccc;
-  height: 20px;
-  background-color: white;
-}
-
-input[type=submit] {
-    width: 80px;
-    height: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    font-family: 'Maven Pro', sans-serif;
-    color: #004977;
-    border: 1px solid #004977;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
-    cursor: pointer;
-}
-
-h1{
-	/*font-family: 'Titillium Web', sans-serif; */
-	font-family: 'Maven Pro', sans-serif;
-	text-transform: uppercase;
-	font-size: 42px;
-	color: #fff;
-  margin: 0;
-}
-
-#marker{
-	width: 1.5%;
-  height: 1.5%;
-}
-
-#pic{
-	width: 20%;
-  height: 20%;
-}
-#form{
-  margin-right: auto;
-  margin-left: auto;
-}
-.labelClass{
-  float:left;
-  width:80px;
-  text-align:left;
-  padding-right:10px;
-}
-
-
 /* CSS for the base.html page */
-#header{
+.header{
   background-color: #004977;
-  padding: 7px;
+  width: 100%;; 
+  padding-bottom: 15px;
+  text-align: center;
+  padding-top: 5px;
 }
 #logo_image {
   display: inline-block;
 }
 
 body{
-  background-color: gray;
-}
-
-#user_info {
-  float: right;
-  font-family: 'Syncopate', sans-serif;
-  color: #fff;
-}
-
-#username{
-  display: inline-block;
-  font-family: 'Maven Pro', sans-serif;
-}
-
-#navigation_menu{
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-#menu_item{
-  text-align: center;
-  padding-top: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  display: inline-block;
-  background-color: gray;
-  outline-width: 3px;
-  outline-style: solid;
-  outline-color: black;
-  font-family: 'Syncopate', sans-serif;
-  font-size: 20px;
-}
-
-#menu_item a {
-  text-decoration:none;
-  color: #000;
-}
-
-#menu_item:hover{
   background-color: white;
+  padding: 0;
+  margin: 0;
 }
 
-/* CSS for home page */
+h1{
+  /*font-family: 'Titillium Web', sans-serif; */
+  font-family: 'Maven Pro', sans-serif;
+  text-transform: uppercase;
+  font-size: 24px;
+  color: #fff;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+ 
+.nav ul {
+  list-style: none;
+  background-color: #979797;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+.nav li {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  line-height: 30px;
+  height: 30px;
+  border-bottom: 1px solid #888;
+}
+ 
+.nav a {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  transition: .3s background-color;
+}
+ 
+.nav a:hover {
+  background-color: #d22f33;
+}
+ 
+.nav a.active {
+  background-color: #fff;
+  color: #444;
+  cursor: default;
+}
+ 
+@media screen and (min-width: 600px) {
+  .nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+  }
+
+  .nav li {
+    display: inline-block;
+    margin-right: -4px;
+  }
+
+}
+
+#logout{
+  float: right;
+  margin-right: 5px;
+  color: white;
+}
+
+#logout a{
+  color: white;
+  margin-right: 5px;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+#logout a.hover {
+  color: white;
+  text-decoration: none;
+}
+
+
+/* CSS for content */
+#content {
+  width: 100%;
+}
+
+#content-wrapper {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px solid gray;
+}
+
+.content-title {
+  font-size: 24px;
+  color: #004977;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.content-block {
+  height: 250px; /*just until we fill with actual content */
+  background-color: #004977;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/*
 
 #home_page_block{
   background-color: white;
@@ -183,11 +146,12 @@ body{
   width: 93%;
   padding-left: 20px;
   padding-right: 20px;
-  margin-left: 25px;
+  margin-left: 20px;
   margin-top: 10px;
   display: inline-block;
   background-color: #004977;
 }
+*/
 
 
 
