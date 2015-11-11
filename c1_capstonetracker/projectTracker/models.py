@@ -54,3 +54,6 @@ class Employee(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=10, blank=True)
     position = models.CharField(max_length=255, blank=True)
+
+   # @classmethod
+   # def create():
