@@ -12,5 +12,7 @@ urlpatterns = [
     url(r'^profile/[0-9]+/', user_profile, name='user_profile'),
     url(r'^addSchool/$', add_school, name='add_school'),
     url(r'^addemployee/$', add_employee, name='add_employee'),
+    url(r'^addstudent/$', add_student, name='add_stundent'),
+    url(r'^addproject/$', add_project, name='add_project'),
     url(r'^$', logout_user, name='logout_user'),
 ]
