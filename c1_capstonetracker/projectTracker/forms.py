@@ -21,7 +21,7 @@ class StudentForm(ModelForm):
         model = Student
         fields = ['first_name', 'last_name', 'email',
                   'phone', 'personal_picture', 'grad_semester',
-                  'major', 'school']
+                  'major', 'school', 'username', 'password']
 
 
 class EmployeeForm(ModelForm):
@@ -30,7 +30,7 @@ class EmployeeForm(ModelForm):
 
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'email', 'phone', 'position']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'position','username','password']
 
 class UserForm(ModelForm):
 

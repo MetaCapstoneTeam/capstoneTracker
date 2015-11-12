@@ -2,8 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
-from .forms import EmployeeForm, SchoolForm, UserForm
-from .models import Employee, Project, School, Student
+from .forms import EmployeeForm, SchoolForm, StudentForm, UserForm
+from .models import BaseUser, Employee, Project, School, Student
 
 
 
@@ -45,6 +45,7 @@ def employee_list(request):
     """Show the list of employees."""
     context = {}
     context['employees'] = Employee.objects.all()
+    context['users'] = BaseUser.objects.all()
     return render(request, 'employee_list.html', context)
 
 
@@ -55,11 +56,12 @@ def add_school(request):
         form = SchoolForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'home_page.html', context)
+            return render(request, 'school_list.html', context)
         else:
             context['form'] = form
     else:
         context['form'] = SchoolForm()
+    context['schools'] = School.objects.all()
     return render(request, 'add_school.html', context)
 
 
@@ -68,21 +70,55 @@ def add_employee(request):
     context = {}
     if request.method == 'POST':
         form = EmployeeForm(request.POST)
-        userform = UserForm(request.POST)
         if form.is_valid():
-            new_user = User.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
-            new_user.first_name = request.POST['first_name']
-            new_user.last_name = request.POST['last_name']
-            new_user.save()
-            form.save()
-            return render(request, 'home_page.html', context)
+            BaseUser.objects.create_user(username=request.POST['username'],
+                                         password=request.POST['password'],
+                                         first_name=request.POST['first_name'],
+                                         last_name=request.POST['last_name'],
+                                         email=request.POST['email'],
+                                         phone=request.POST['phone'])
+            auth_user = authenticate(username=request.POST['username'],password=request.POST['password'])
+            login(request,auth_user)
+            employee = Employee(baseuser_ptr_id=auth_user.id,
+                            position=request.POST['position'],)
+            employee.__dict__.update(auth_user.__dict__)
+            employee.save()
+            context['employees'] = Employee.objects.all()
+            return render(request, 'employee_list.html', context)
         else:
             context['form'] = form
-            context['userForm'] = userform
     else:
         context['form'] = EmployeeForm()
-        context['userForm'] = UserForm()
     return render(request, 'add_employee.html', context)
+
+def add_student(request):
+    """Add student."""
+    context = {}
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            BaseUser.objects.create_user(username=request.POST['username'],
+                                         password=request.POST['password'],
+                                         first_name=request.POST['first_name'],
+                                         last_name=request.POST['last_name'],
+                                         email=request.POST['email'],
+                                         phone=request.POST['phone'])
+            auth_user = authenticate(username=request.POST['username'],password=request.POST['password'])
+            login(request,auth_user)
+            student = Student(baseuser_ptr_id=auth_user.id,
+                            #personal_picture=request.POST['personal_picture'],
+                            grad_semester=request.POST['grad_semester'],
+                            major= request.POST['major'],
+                            school=School.objects.get(id=request.POST['school']))
+            student.__dict__.update(auth_user.__dict__)
+            student.save()
+            context['students'] = Student.objects.all()
+            return render(request, 'student_list.html', context)
+        else:
+            context['form'] = form
+    else:
+        context['form'] = StudentForm()
+    return render(request, 'add_student.html', context)
 
 
 def login_user(request):
@@ -93,8 +129,6 @@ def login_user(request):
     if request.POST:
         username = request.POST.get('username')
         password = request.POST.get('password')
-        login_type = request.POST.get('login_t')
-        print(login_type)
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
@@ -104,6 +138,7 @@ def login_user(request):
                 state = "Your account is not active, contact the admin. "
         else:
             state = "Your username and/or password were incorrect."
+            context['state'] = state
         return render(request, 'index.html', context)
 
 
