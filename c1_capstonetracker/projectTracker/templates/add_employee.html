@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<form class="add_form";method="post">
-	<div id='container'>
-	<div align="center">
+<form class="add_form"; method="post">
+	<div type='container' align="center">
 		<h1 align="center"> Add Employee </h1>
 		{% csrf_token %}
 		{{ form }}
 		<h1 align="center"> Login Information </h1>
 		{{ userForm }}
 		<input type="submit" value="Submit"/>
-	</div>	
 	</div>
 </form>
 {% endblock %}

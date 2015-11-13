@@ -198,7 +198,7 @@ td {
   padding-bottom: 0px;
 }
 
-#container {
+.add_form [type=container] {
   background-color: #004977;
   width: 80%;
   height: 98%;
