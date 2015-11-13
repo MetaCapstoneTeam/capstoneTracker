@@ -7,7 +7,7 @@ class Project(models.Model):
     """Project - Information about a capstone Project."""
 
     name = models.CharField(max_length=255, null=True)
-    team = models.ManyToManyField('Employee')
+    team = models.ForeignKey('SchoolTeam')
     proposal = models.TextField()
 
 
@@ -15,10 +15,11 @@ class SchoolTeam(models.Model):
 
     """SchoolTeam-- Information about a School team."""
 
-    team_members = models.ManyToManyField('Student')
-    project_id = models.ForeignKey('Project')
+    student_members = models.ManyToManyField('Student')
+    employee_members = models.ManyToManyField('Employee')
     school_id = models.ForeignKey('School')
     semester = models.CharField(max_length=255, blank=True)
+    year = models.PositiveIntegerField()
 
 
 class School(models.Model):

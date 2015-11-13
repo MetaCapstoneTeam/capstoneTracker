@@ -32,14 +32,6 @@ class EmployeeForm(ModelForm):
         model = Employee
         fields = ['first_name', 'last_name', 'email', 'phone', 'position','username','password']
 
-class UserForm(ModelForm):
-
-    """User Form class."""
-
-    class Meta:
-        model = User
-        fields = ['username', 'password' ]
-
 
 class SchoolForm(ModelForm):
 
@@ -51,10 +43,10 @@ class SchoolForm(ModelForm):
                   'contact_email', 'contact_phone']
 
 
-class SchoolTeam(ModelForm):
+class SchoolTeamForm(ModelForm):
 
     """School Team Form class."""
 
     class Meta:
         model = SchoolTeam
-        fields = ['team_members', 'project_id', 'school_id', 'semester']
+        fields = ['student_members', 'employee_members', 'school_id', 'semester', 'year']

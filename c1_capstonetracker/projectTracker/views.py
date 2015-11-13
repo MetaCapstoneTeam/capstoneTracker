@@ -2,8 +2,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
-from .forms import EmployeeForm, SchoolForm, StudentForm, UserForm
-from .models import BaseUser, Employee, Project, School, Student
+from .forms import EmployeeForm, ProjectForm, SchoolForm, SchoolTeamForm, StudentForm
+from .models import BaseUser, Employee, Project, School, SchoolTeam, Student
 
 
 
@@ -45,8 +45,13 @@ def employee_list(request):
     """Show the list of employees."""
     context = {}
     context['employees'] = Employee.objects.all()
-    context['users'] = BaseUser.objects.all()
     return render(request, 'employee_list.html', context)
+
+def team_list(request):
+    """Show the list of teams."""
+    context = {}
+    context['teams'] = SchoolTeam.objects.all()
+    return render(request, 'team_list.html', context)
 
 
 def add_school(request):
@@ -56,7 +61,7 @@ def add_school(request):
         form = SchoolForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'school_list.html', context)
+            return redirect('/projectTracker/schoollist/')
         else:
             context['form'] = form
     else:
@@ -83,8 +88,7 @@ def add_employee(request):
                             position=request.POST['position'],)
             employee.__dict__.update(auth_user.__dict__)
             employee.save()
-            context['employees'] = Employee.objects.all()
-            return render(request, 'employee_list.html', context)
+            return redirect('/projectTracker/employeelist/')
         else:
             context['form'] = form
     else:
@@ -112,13 +116,44 @@ def add_student(request):
                             school=School.objects.get(id=request.POST['school']))
             student.__dict__.update(auth_user.__dict__)
             student.save()
-            context['students'] = Student.objects.all()
-            return render(request, 'student_list.html', context)
+            return redirect('/projectTracker/studentlist/')
         else:
             context['form'] = form
     else:
         context['form'] = StudentForm()
     return render(request, 'add_student.html', context)
+
+
+def add_project(request):
+    """Add project."""
+    context = {}
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/projectTracker/projectlist/')
+        else:
+            context['form'] = form
+    else:
+        context['form'] = ProjectForm()
+    context['projects'] = Project.objects.all()
+    return render(request, 'add_project.html', context)
+
+
+def add_team(request):
+    """Add team."""
+    context = {}
+    if request.method == 'POST':
+        form = SchoolTeamForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/projectTracker/teamlist/')
+        else:
+            context['form'] = form
+    else:
+        context['form'] = SchoolTeamForm()
+    context['teams'] = SchoolTeam.objects.all()
+    return render(request, 'add_team.html', context)
 
 
 def login_user(request):
@@ -151,6 +186,7 @@ def user_profile(request):
     context = {}
     user = request.user
     context['user'] = user
+    
     
     # if  Employee.objects.get(email=user.email) != doesnotexists:
         # context['user'] = empl
