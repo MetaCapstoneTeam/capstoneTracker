@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 
-from .forms import EmployeeForm, SchoolForm, UserForm
+from .forms import EmployeeForm, StudentForm, SchoolForm, UserForm
 from .models import Employee, Project, School, Student
 
 
@@ -88,7 +88,7 @@ def add_student(request):
     """Add student."""
     context = {}
     if request.method == 'POST':
-        form = EmployeeForm(request.POST)
+        form = StudentForm(request.POST)
         userform = UserForm(request.POST)
         if form.is_valid():
             new_user = User.objects.create_user(request.POST['username'],request.POST['email'],request.POST['password'])
@@ -101,7 +101,7 @@ def add_student(request):
             context['form'] = form
             context['userForm'] = userform
     else:
-        context['form'] = EmployeeForm()
+        context['form'] = StudentForm()
         context['userForm'] = UserForm()
     return render(request, 'add_student.html', context)
 
