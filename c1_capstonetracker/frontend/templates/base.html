@@ -47,6 +47,10 @@
             {% url 'project_list' as home_url %}
             {% if request.get_full_path == home_url %} class="active"
             {% endif %} href="{% url "project_list" %}"> Projects</a></li>
+        <li><a
+            {% url 'team_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "team_list" %}"> Teams</a></li>
       </ul>
     </div>
   </header>

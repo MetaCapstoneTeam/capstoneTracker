@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -6,7 +7,7 @@ class Project(models.Model):
     """Project - Information about a capstone Project."""
 
     name = models.CharField(max_length=255, null=True)
-    team = models.ManyToManyField('Employee')
+    team = models.ForeignKey('SchoolTeam')
     proposal = models.TextField()
 
 
@@ -14,10 +15,11 @@ class SchoolTeam(models.Model):
 
     """SchoolTeam-- Information about a School team."""
 
-    team_members = models.ManyToManyField('Student')
-    project_id = models.ForeignKey('Project')
+    student_members = models.ManyToManyField('Student')
+    employee_members = models.ManyToManyField('Employee')
     school_id = models.ForeignKey('School')
     semester = models.CharField(max_length=255, blank=True)
+    year = models.PositiveIntegerField()
 
 
 class School(models.Model):
@@ -31,26 +33,31 @@ class School(models.Model):
     contact_phone = models.CharField(max_length=10)
 
 
-class Student(models.Model):
+class BaseUser(AbstractUser):
+
+    """Base User - Information about a User"""
+
+    phone = models.CharField(max_length=10, blank=True)
+
+
+class Student(BaseUser):
 
     """Student - Information about a Student."""
 
-    first_name = models.CharField(max_length=255, null=True)
-    last_name = models.CharField(max_length=255, null=True)
-    email = models.EmailField()
-    phone = models.CharField(max_length=10, blank=True)
     personal_picture = models.ImageField(null=True, blank=True)
     grad_semester = models.CharField(max_length=255, blank=True)
     major = models.CharField(max_length=255, blank=True)
     school = models.ForeignKey('School')
 
+    class Meta:
+        verbose_name = 'student'
 
-class Employee(models.Model):
+
+class Employee(BaseUser):
 
     """Employee - Information about a Employee."""
     
-    first_name = models.CharField(max_length=255, null=True)
-    last_name = models.CharField(max_length=255, null=True)
-    email = models.EmailField()
-    phone = models.CharField(max_length=10, blank=True)
     position = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        verbose_name = 'employee'

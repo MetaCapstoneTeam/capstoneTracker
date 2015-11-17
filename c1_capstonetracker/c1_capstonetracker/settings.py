@@ -72,6 +72,7 @@ TEMPLATES = [
     },
 ]
 
+AUTH_USER_MODEL = 'projectTracker.BaseUser'
 WSGI_APPLICATION = 'c1_capstonetracker.wsgi.application'
 
 
