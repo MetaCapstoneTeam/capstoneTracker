@@ -2,11 +2,9 @@
 
 {% load tz %}
 {% block content %}
-
 <div id ="content-wrapper">
-    
 <table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
-    <td> </td> <td><a href="{% url "add_student" %}"> + Add </a></td></table>
+    <td> </td> <td><a href="{% url "add_team" %}"> + Add </a></td></table>
 <table align = 'center',border=1>
     <colgroup>
     <col width="25%">
@@ -16,20 +14,23 @@
     </colgroup>
     <thead>
         <tr>
-            <th>Student Name</th>
+            <th>Project </th>
             <th>School</th>
-            <th>Major</th>
+            <th>Students</th>
+            <th>Employee</th>
         </tr>
     </thead>
     <tbody>
-        {% for student in students %}
+        {% for team in teams %}
         <tr>
-            <td>{{ student.last_name }}, {{ student.first_name }}</td>
-            <td>{{ student.school.name }}</td>
-            <td>{{ student.major }}</td>
+            <td>{{ team.project_id }}</td>
+            <td>{{ team.school_id }}</td>
+            <td>{{ team.student_team }}</td>
+            <td>{{ team.employee_teams }}</td>
         </tr>
         {% endfor %}
     </tbody>    
 </table>
 </div>
+
 {% endblock %}
