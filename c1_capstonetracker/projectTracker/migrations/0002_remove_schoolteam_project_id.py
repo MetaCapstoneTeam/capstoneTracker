@@ -7,16 +7,12 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projectTracker', '0004_auto_20151020_0952'),
+        ('projectTracker', '0001_initial'),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='project',
-            name='school_teams',
-        ),
-        migrations.RemoveField(
             model_name='schoolteam',
-            name='mentors',
+            name='project_id',
         ),
     ]
