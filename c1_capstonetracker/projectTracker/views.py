@@ -140,6 +140,7 @@ def add_project(request):
             context['form'] = form
     else:
         context['form'] = ProjectForm()
+
     context['projects'] = Project.objects.all()
     return render(request, 'add_project.html', context)
 
