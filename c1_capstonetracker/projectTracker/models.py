@@ -61,5 +61,3 @@ class Employee(BaseUser):
 
     class Meta:
         verbose_name = 'employee'
-        
-

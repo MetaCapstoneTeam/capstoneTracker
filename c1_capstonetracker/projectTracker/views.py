@@ -1,11 +1,16 @@
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, Permission, User
+from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import redirect, render
 
 from .forms import EmployeeForm, ProjectForm, SchoolForm, SchoolTeamForm, StudentForm
 from .models import BaseUser, Employee, Project, School, SchoolTeam, Student
 
 
+#emp_content_type = ContentType.objects.get(app_label='projectTracker', model='Employee')
+#Permission.objects.create(codename='can_see_lists',
+                                      # name='Can See Lists of Students, Employees, Projects, and Schools',
+                                      # content_type=emp_content_type)
 
 def home_page(request):
     """Show the home page."""
@@ -123,7 +128,6 @@ def add_student(request):
         context['form'] = StudentForm()
     return render(request, 'add_student.html', context)
 
-
 def add_project(request):
     """Add project."""
     context = {}
@@ -173,7 +177,7 @@ def login_user(request):
                 state = "Your account is not active, contact the admin. "
         else:
             state = "Your username and/or password were incorrect."
-            context['state'] = state
+        context['state'] = state
         return render(request, 'index.html', context)
 
 
@@ -186,8 +190,6 @@ def user_profile(request):
     context = {}
     user = request.user
     context['user'] = user
-    
-    
     # if  Employee.objects.get(email=user.email) != doesnotexists:
         # context['user'] = empl
     
