@@ -171,12 +171,8 @@ td {
   color: white;
   text-transform: capitalize;
   padding-top: 7px;
-<<<<<<< HEAD
-  padding-bottom: 7px; 
-=======
   padding-bottom: 7px;
-  margin-top: 25px; 
->>>>>>> master
+  /*margin-top: 25px;*/ 
   font-size: 35px;
 }
 
@@ -212,8 +208,7 @@ td {
   margin-top: 1%;
   margin-bottom: 1%; 
 }
-<<<<<<< HEAD
-=======
+
 
 .add_form input[type=submit] {
   width: 210px;
@@ -239,9 +234,6 @@ td {
 }
 
 
-
-
->>>>>>> master
 
 .add_form input[type=submit] {
   width: 210px;
