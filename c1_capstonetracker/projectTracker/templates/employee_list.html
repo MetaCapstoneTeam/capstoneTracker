@@ -24,9 +24,9 @@
     <tbody>
         {% for employee in employees %}
         <tr>
-            <td>{{ employee.first_name }} {{ employee.last_name }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.phone }}</td>
+            <td>{{ employee.baseuser_ptr.first_name }} {{ employee.baseuser_ptr.last_name }}</td>
+            <td>{{ employee.baseuser_ptr.email }}</td>
+            <td>{{ employee.baseuser_ptr.phone }}</td>
             <td>{{ employee.position }}</td>
         </tr>
         {% endfor %}
