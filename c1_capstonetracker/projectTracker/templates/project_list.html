@@ -25,7 +25,8 @@
         <tr>
             <td>{{ project.name }}</td>
             <td>{{ project.proposal }}</td>
-            <td><a href="{% url "project_details" project.id %}"/>Team</td>
+            <td>{{ project }}</td>
+            <td>{{ project.team.student_members }}</td>
         </tr>
         {% endfor %}
     </tbody>    
