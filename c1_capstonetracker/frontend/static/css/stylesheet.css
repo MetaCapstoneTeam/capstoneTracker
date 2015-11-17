@@ -161,6 +161,80 @@ td {
   text-decoration: none;
 }
 
+/* Add Pages */
+.add_form {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+}
+
+.add_form h1 {
+  color: white;
+  text-transform: capitalize;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  margin-top: 25px; 
+  font-size: 35px;
+}
+
+.add_form label {
+  text-align: center;
+  display:block;
+  clear:both;
+}
+
+.add_form input {
+  vertical-align: center;
+  
+  color: #777;
+  width: 200px;
+  height: 20px;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 15px;
+  page-break-after: always;
+
+}
+
+.add_form lower {
+  padding-bottom: 0px;
+}
+
+.add_form [type=container] {
+  background-color: #004977;
+  width: 80%;
+  height: 98%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%; 
+}
+
+.add_form input[type=submit] {
+  width: 210px;
+  height: 30px;
+  border-radius: 27px;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Maven Pro', sans-serif;
+  background-color: #004977;
+  color: #d22f33;
+  border: 2px solid #d22f33;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .5);
+  cursor: pointer; 
+  display: block;
+}
+
+.add_form span {
+  font-size: 10px;
+  color: #979797;
+}
+
+
+
+
 
 
 
