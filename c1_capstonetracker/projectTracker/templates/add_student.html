@@ -1,11 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1> Add Student </h1>
-<form method="post">
-{% csrf_token %}
-{{ form }}
-<input type="submit" value="Submit"/>
+<form class='add_form'; method="post">
+<<<<<<< HEAD
+	<div type='container' align="center">
+
+=======
+<<<<<<< HEAD
+	<div id='container' align="center">
+=======
+	<div type='container' align="center">
+>>>>>>> master
+>>>>>>> 477ef9d63eaa96a8d425d67e4486afaf4a28362b
+		<h1> Add Student </h1>
+		{% csrf_token %}
+		{{ form }}
+		<h1> Login Information </h1>
+		{{ userForm }}
+		<input type="submit" value="Submit"/>
+	</div>
 </form>
 
+<<<<<<< HEAD
 {% endblock %}
+=======
+<<<<<<< HEAD
+{% endblock %}
+=======
+{% endblock %}
+>>>>>>> master
+>>>>>>> 477ef9d63eaa96a8d425d67e4486afaf4a28362b
