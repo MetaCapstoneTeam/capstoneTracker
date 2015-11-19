@@ -23,10 +23,10 @@
     <tbody>
         {% for team in teams %}
         <tr>
-            <td>{{ team.project_id }}</td>
-            <td>{{ team.school_id }}</td>
-            <td>{{ team.student_team }}</td>
-            <td>{{ team.employee_teams }}</td>
+            <td>{{ team.project.name }}</td>
+            <td>{{ team.school.name }}</td>
+            <td>{{ team.student_members }}</td>
+            <td>{{ team.employee_members }}</td>
         </tr>
         {% endfor %}
     </tbody>    

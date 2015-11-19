@@ -10,7 +10,7 @@ class ProjectForm(ModelForm):
 
     class Meta:
         model = Project
-        fields = ['name', 'team', 'proposal']
+        fields = ['name', 'proposal']
 
 
 class StudentForm(ModelForm):
@@ -49,4 +49,4 @@ class SchoolTeamForm(ModelForm):
 
     class Meta:
         model = SchoolTeam
-        fields = ['student_members', 'employee_members', 'school_id', 'semester', 'year']
+        fields = ['student_members', 'employee_members', 'school', 'project', 'semester', 'year']
