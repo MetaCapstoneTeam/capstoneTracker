@@ -24,13 +24,7 @@ h1{
   color: #fff;
   margin: 0;
 }
-/*
-body {
-  margin: 0;
-  padding: 0;
-  background: #fff;
-}
- */
+
 .nav ul {
   list-style: none;
   background-color: #979797;
@@ -184,7 +178,6 @@ td {
 
 .add_form input {
   vertical-align: center;
-  
   color: #777;
   width: 200px;
   height: 20px;
@@ -192,7 +185,17 @@ td {
   margin-top: 7px;
   margin-bottom: 15px;
   page-break-after: always;
+}
 
+.add_form select {
+  vertical-align: center;
+  color: #777;
+  width: 200px;
+  height: 20px;
+  display: block;
+  margin-top: 7px;
+  margin-bottom: 15px;
+  page-break-after: always;
 }
 
 .add_form lower {
@@ -208,7 +211,6 @@ td {
   margin-top: 1%;
   margin-bottom: 1%; 
 }
-
 
 .add_form input[type=submit] {
   width: 210px;
@@ -233,7 +235,10 @@ td {
   color: #979797;
 }
 
-
+.add_form li {
+  text-align: center;
+  font-size: 12px;
+}
 
 .add_form input[type=submit] {
   width: 210px;

@@ -34,6 +34,7 @@
   margin-bottom: 15px;
   text-align: center;  
   padding-bottom: 0em;
+  font-size: 10px;
 }
 
 .login {
@@ -57,7 +58,7 @@
 input[type=text],
 input[type=password] {
     color: #777;
-    width: 200px;
+    width: 225px;
     height: 15px;
     display: inline-block;
     margin-bottom: 3px;
