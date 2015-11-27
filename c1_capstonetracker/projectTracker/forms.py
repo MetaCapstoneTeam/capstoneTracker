@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.forms import ModelForm
 
 from .models import *
@@ -30,7 +29,8 @@ class EmployeeForm(ModelForm):
 
     class Meta:
         model = Employee
-        fields = ['first_name', 'last_name', 'email', 'phone', 'position','username','password']
+        fields = ['first_name', 'last_name', 'email', 'phone',
+                  'position', 'username', 'password']
 
 
 class SchoolForm(ModelForm):
@@ -49,4 +49,5 @@ class SchoolTeamForm(ModelForm):
 
     class Meta:
         model = SchoolTeam
-        fields = ['student_members', 'employee_members', 'school', 'project', 'semester', 'year']
+        fields = ['student_members', 'employee_members', 'school',
+                  'project', 'semester', 'year']

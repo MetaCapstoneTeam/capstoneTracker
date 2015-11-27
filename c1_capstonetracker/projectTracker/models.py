@@ -30,12 +30,12 @@ class School(models.Model):
     contact_first_name = models.CharField(max_length=255)
     contact_last_name = models.CharField(max_length=255)
     contact_email = models.EmailField()
-    contact_phone = models.CharField(max_length=10)
+    contact_phone = models.CharField(max_length=10, blank=True)
 
 
 class BaseUser(AbstractUser):
 
-    """Base User - Information about a User"""
+    """Base User - Information about a User."""
 
     phone = models.CharField(max_length=10, blank=True)
 
@@ -56,8 +56,18 @@ class Student(BaseUser):
 class Employee(BaseUser):
 
     """Employee - Information about a Employee."""
-    
+
     position = models.CharField(max_length=255, blank=True)
 
     class Meta:
         verbose_name = 'employee'
+
+
+class Administrator(BaseUser):
+
+    """Administrator - Information about Admin Users."""
+
+    position = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        verbose_name = 'administrator'
