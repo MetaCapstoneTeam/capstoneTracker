@@ -237,8 +237,12 @@ def my_project(request):
     """Show the project of current user, allow updates."""
     if request.user.is_authenticated():
         context = {}
-        context['teams'] = SchoolTeam.objects.filter(
-            student_members=request.user)
+        if SchoolTeam.objects.filter(student_members=request.user):
+            context['teams'] = SchoolTeam.objects.filter(
+                student_members=request.user)
+        else:
+            context['teams'] = SchoolTeam.objects.filter(
+                employee_members=request.user)
         return render(request, 'my_project.html', context)
     else:
         redirect('/')
