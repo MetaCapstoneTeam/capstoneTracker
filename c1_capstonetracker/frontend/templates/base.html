@@ -15,7 +15,7 @@
   <header>
       <div class='header'>
         <div id = 'logout'>
-            <a href="{% url "user_profile" %}"> My Profile </a> |
+            <a href="{% url "user_profile" user.id %}"> My Profile </a> |
             <a href="{% url "logout_user" %}"> Logout </a></div>
     </div>
     <div class ='header'>
@@ -31,26 +31,42 @@
             {% url 'home_page' as home_url %}
             {% if request.get_full_path == home_url %} class="active" 
             {% endif %} href="{% url "home_page" %}">Home</a></li>
+
+        {% if perms.projectTracker.can_view_students %}
         <li> <a 
             {% url 'student_list' as home_url %}
             {% if request.get_full_path == home_url %} class="active"
             {% endif %} href="{% url "student_list" %}"> Students </a></li>
+        {% endif %}
+
+        {% if perms.projectTracker.can_view_employees %}
         <li><a 
             {% url 'employee_list' as home_url %}
             {% if request.get_full_path == home_url %} class="active"
-            {% endif %} href="{% url "employee_list" %}"> Employees </a></li>
+            {% endif %} 
+            href="{% url "employee_list" %}"> Employees </a></li>
+        {% endif %}
+
+        {% if perms.projectTracker.can_view_schools %}
         <li><a 
             {% url 'school_list' as home_url %}
             {% if request.get_full_path == home_url %} class="active"
             {% endif %}  href="{% url "school_list" %}"> Schools</a></li>
+        {% endif %}
+
+        {% if perms.projectTracker.can_view_projects %}
         <li><a
             {% url 'project_list' as home_url %}
             {% if request.get_full_path == home_url %} class="active"
             {% endif %} href="{% url "project_list" %}"> Projects</a></li>
+        {% endif %}
+
+        {% if perms.projectTracker.can_view_teams %}
         <li><a
             {% url 'team_list' as home_url %}
             {% if request.get_full_path == home_url %} class="active"
             {% endif %} href="{% url "team_list" %}"> Teams</a></li>
+        {% endif %}
       </ul>
     </div>
   </header>

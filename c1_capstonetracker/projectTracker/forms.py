@@ -20,7 +20,8 @@ class StudentForm(ModelForm):
         model = Student
         fields = ['first_name', 'last_name', 'email',
                   'phone', 'personal_picture', 'grad_semester',
-                  'major', 'school', 'username', 'password']
+                  'grad_year', 'major', 'school', 'username',
+                  'password']
 
 
 class EmployeeForm(ModelForm):

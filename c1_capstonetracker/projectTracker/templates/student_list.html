@@ -6,7 +6,10 @@
 <div id ="content-wrapper">
     
 <table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
-    <td> </td> <td><a href="{% url "add_student" %}"> + Add </a></td></table>
+    <td> </td> 
+    {% if perms.projectTracker.can_add_student %} 
+    <td><a href="{% url "add_student" %}"> + Add </a></td></table>
+    {% endif %}
 <table align = 'center',border=1>
     <colgroup>
     <col width="25%">
@@ -19,6 +22,8 @@
             <th>Student Name</th>
             <th>School</th>
             <th>Major</th>
+            <th>Gradutaion Date</th>
+            <th>Student Profile</th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +32,8 @@
             <td>{{ student.last_name }}, {{ student.first_name }}</td>
             <td>{{ student.school.name }}</td>
             <td>{{ student.major }}</td>
+            <td>{{ student.grad_semester }} {{ student.grad_year }}</td>
+            <td><a href="{% url "user_profile" student.baseuser_ptr_id %}"/>Profile</td>
         </tr>
         {% endfor %}
     </tbody>    

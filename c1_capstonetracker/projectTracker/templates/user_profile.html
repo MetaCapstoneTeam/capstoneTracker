@@ -4,9 +4,32 @@
 {% block content %}
 
 
-<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+{{ user.first_name }} 
+</br>
+{{ user.last_name }}
+</br>
+{{ user.email }}
+</br>
+{{ user.username }}
+</br>
+{{ user.phone }}
 
-<h2>{{ user.email }}</h2>
+{% if perms.projectTracker.has_student_profile %}
+</br>
+{{ user.student.grad_semester }}
+{{ user.student.grad_year }}
+</br>
+{{ user.student.personal_picture }}
+</br>
+{{ user.student.major }}
+</br>
+{{ user.student.school.name }}
+{% endif %}
+
+{% if perms.projectTracker.has_employee_profile %}
+	{{ user.Employee.position }}
+	</br>
+{% endif %}
 
 
 {% endblock %}

@@ -5,7 +5,10 @@
 
 <div id ="content-wrapper">
 <table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
-    <td> </td> <td><a href="{% url "add_employee" %}"> + Add </a></td></table>
+    <td> </td> 
+    {% if perms.projectTracker.can_edit_employees %}
+    <td><a href="{% url "add_employee" %}"> + Add </a></td></table>
+    {% endif %}
 <table align = 'center',border=1>
     <colgroup>
     <col width="25%">
@@ -19,6 +22,7 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Position</th>
+            <th>Username</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +32,7 @@
             <td>{{ employee.baseuser_ptr.email }}</td>
             <td>{{ employee.baseuser_ptr.phone }}</td>
             <td>{{ employee.position }}</td>
+            <td>{{ employee.username }}</td>
         </tr>
         {% endfor %}
     </tbody>    

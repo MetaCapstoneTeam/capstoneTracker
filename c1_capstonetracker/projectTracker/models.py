@@ -46,6 +46,7 @@ class Student(BaseUser):
 
     personal_picture = models.ImageField(null=True, blank=True)
     grad_semester = models.CharField(max_length=255, blank=True)
+    grad_year = models.PositiveIntegerField(blank=True)
     major = models.CharField(max_length=255, blank=True)
     school = models.ForeignKey('School')
 
@@ -61,6 +62,8 @@ class Employee(BaseUser):
 
     class Meta:
         verbose_name = 'employee'
+
+    PERMISSIONS =['can_view_employees']
 
 
 class Administrator(BaseUser):

@@ -5,7 +5,11 @@
 
 <div id ="content-wrapper">
 <table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
-    <td> </td> <td><a href="{% url "add_school" %}"> + Add </a></td></table>
+    <td> </td> 
+    {% if perms.projectTracker.can_edit_employees %}
+    <td><a href="{% url "add_school" %}"> + Add </a></td></table>
+    {% endif %}
+    
 <table align="center",border=1>
     <colgroup>
     <col width="25%">

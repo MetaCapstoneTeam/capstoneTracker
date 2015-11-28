@@ -23,6 +23,9 @@ class ProjectTrackerViewsTests(TestCase):
                                                    email='t@email.com',
                                                    password='pass',
                                                    school=self.test_school)
+        self.test_employee = Employee.objects.create(username='testEmployee',
+                                                     email='ttt@email.com',
+                                                     password='pass')
 
     def test_home_page_view_returns_correct_html(self):
         """Test that the home page view returns correct html."""
@@ -52,7 +55,7 @@ class ProjectTrackerViewsTests(TestCase):
     def test_project_list_view_returns_correct_html(self):
         """Test that the project list view returns correct html."""
         request = HttpRequest()
-        request.user = self.test_student
+        request.user = self.test_employee
         response = project_list(request)
         context = {}
         context['projects'] = Project.objects.all()
@@ -91,7 +94,7 @@ class ProjectTrackerViewsTests(TestCase):
     def test_employee_list_view_returns_correct_html(self):
         """Test that the employee list view returns correct html."""
         request = HttpRequest()
-        request.user = self.test_student
+        request.user = self.test_employee
         response = employee_list(request)
         context = {}
         context['employees'] = Employee.objects.all()

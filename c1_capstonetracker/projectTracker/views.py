@@ -1,15 +1,20 @@
 from django.contrib.auth import authenticate, login, logout
+# from django.contrib.auth.models import Group
 from django.shortcuts import redirect, render
 
 from .forms import EmployeeForm, ProjectForm, SchoolForm
 from .forms import SchoolTeamForm, StudentForm
+from .groups import *
 from .models import BaseUser, Employee, Project, School, SchoolTeam, Student
 
 
 def home_page(request):
     """Show the home page."""
     if request.user.is_authenticated():
-        return render(request, 'home_page.html')
+        context = {}
+        context['user'] = request.user
+        return render(request, 'home_page.html', context)
+
     else:
         return redirect('/')
 
@@ -30,6 +35,8 @@ def project_details(request, project_id):
         context = {}
         project = Project.objects.get(id=project_id)
         context['project'] = project
+        context['team'] = SchoolTeam.objects.get(project_id=project_id)
+        
         return render(request, 'project_details.html', context)
     else:
         redirect('/')
@@ -111,10 +118,10 @@ def add_employee(request):
                 auth_user = authenticate(
                     username=request.POST['username'],
                     password=request.POST['password'])
-                login(request, auth_user)
                 employee = Employee(baseuser_ptr_id=auth_user.id,
                                     position=request.POST['position'])
                 employee.__dict__.update(auth_user.__dict__)
+                employee.groups.add(employee_users)
                 employee.save()
                 return redirect('/projectTracker/employeelist/')
             else:
@@ -143,13 +150,14 @@ def add_student(request):
                 auth_user = authenticate(
                     username=request.POST['username'],
                     password=request.POST['password'])
-                login(request, auth_user)
                 student = Student(
                     baseuser_ptr_id=auth_user.id,
                     grad_semester=request.POST['grad_semester'],
+                    grad_year=request.POST['grad_year'],
                     major=request.POST['major'],
                     school=School.objects.get(id=request.POST['school']))
                 student.__dict__.update(auth_user.__dict__)
+                student.groups.add(student_users)
                 student.save()
                 return redirect('/projectTracker/studentlist/')
             else:
@@ -227,11 +235,11 @@ def logout_user(request):
     return render(request, 'index.html')
 
 
-def user_profile(request):
+def user_profile(request, user_id):
     """Show the profile of a user."""
     if request.user.is_authenticated():
         context = {}
-        user = request.user
+        user = BaseUser.objects.get(id=user_id) 
         context['user'] = user
         return render(request, 'user_profile.html', context)
     else:
