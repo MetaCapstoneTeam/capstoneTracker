@@ -22,7 +22,8 @@ class ProjectTrackerViewsTests(TestCase):
         self.test_student = Student.objects.create(username='testStudent',
                                                    email='t@email.com',
                                                    password='pass',
-                                                   school=self.test_school)
+                                                   school=self.test_school,
+                                                   grad_year=2015)
         self.test_employee = Employee.objects.create(username='testEmployee',
                                                      email='ttt@email.com',
                                                      password='pass')
@@ -32,7 +33,9 @@ class ProjectTrackerViewsTests(TestCase):
         request = HttpRequest()
         request.user = self.test_student
         response = home_page(request)
-        expected_content = render_to_string('home_page.html')
+        context = {}
+        context['user'] = self.test_student
+        expected_content = render_to_string('home_page.html', context)
         self.assertEqual(
             response.content.decode('utf8'),
             expected_content
@@ -46,6 +49,7 @@ class ProjectTrackerViewsTests(TestCase):
         context = {}
         project = Project.objects.get(id=self.test_project.id)
         context['project'] = project
+        context['user'] = self.test_student
         expected_content = render_to_string('project_details.html', context)
         self.assertEqual(
             response.content.decode('utf8'),
@@ -59,6 +63,7 @@ class ProjectTrackerViewsTests(TestCase):
         response = project_list(request)
         context = {}
         context['projects'] = Project.objects.all()
+        context['user'] = self.test_employee
         expected_content = render_to_string('project_list.html', context)
         self.assertEqual(
             response.content.decode('utf8'),
@@ -72,6 +77,7 @@ class ProjectTrackerViewsTests(TestCase):
         response = school_list(request)
         context = {}
         context['schools'] = School.objects.all()
+        context['user'] = self.test_student
         expected_content = render_to_string('school_list.html', context)
         self.assertEqual(
             response.content.decode('utf8'),
@@ -85,6 +91,7 @@ class ProjectTrackerViewsTests(TestCase):
         response = student_list(request)
         context = {}
         context['students'] = Student.objects.all()
+        context['user'] = self.test_student
         expected_content = render_to_string('student_list.html', context)
         self.assertEqual(
             response.content.decode('utf8'),
@@ -98,6 +105,7 @@ class ProjectTrackerViewsTests(TestCase):
         response = employee_list(request)
         context = {}
         context['employees'] = Employee.objects.all()
+        context['user'] = self.test_employee
         expected_content = render_to_string('employee_list.html', context)
         self.assertEqual(
             response.content.decode('utf8'),

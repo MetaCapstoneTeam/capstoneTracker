@@ -35,8 +35,7 @@ def project_details(request, project_id):
         context = {}
         project = Project.objects.get(id=project_id)
         context['project'] = project
-        context['team'] = SchoolTeam.objects.get(project_id=project_id)
-        
+        # context['team'] = SchoolTeam.objects.get(project_id=project_id)
         return render(request, 'project_details.html', context)
     else:
         redirect('/')
@@ -239,7 +238,7 @@ def user_profile(request, user_id):
     """Show the profile of a user."""
     if request.user.is_authenticated():
         context = {}
-        user = BaseUser.objects.get(id=user_id) 
+        user = BaseUser.objects.get(id=user_id)
         context['user'] = user
         return render(request, 'user_profile.html', context)
     else:

@@ -63,7 +63,7 @@ class Employee(BaseUser):
     class Meta:
         verbose_name = 'employee'
 
-    PERMISSIONS =['can_view_employees']
+    PERMISSIONS = ['can_view_employees']
 
 
 class Administrator(BaseUser):
