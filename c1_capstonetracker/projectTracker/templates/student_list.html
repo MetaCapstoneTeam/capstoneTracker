@@ -23,17 +23,17 @@
             <th>School</th>
             <th>Major</th>
             <th>Gradutaion Date</th>
-            <th>Student Profile</th>
         </tr>
     </thead>
     <tbody>
         {% for student in students %}
         <tr>
-            <td>{{ student.last_name }}, {{ student.first_name }}</td>
+            <td>
+                <a href="{% url "user_profile" student.baseuser_ptr_id %}"/>
+                    {{ student.last_name }}, {{ student.first_name }}</td>
             <td>{{ student.school.name }}</td>
             <td>{{ student.major }}</td>
             <td>{{ student.grad_semester }} {{ student.grad_year }}</td>
-            <td><a href="{% url "user_profile" student.baseuser_ptr_id %}"/>Profile</td>
         </tr>
         {% endfor %}
     </tbody>    

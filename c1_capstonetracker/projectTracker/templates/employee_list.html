@@ -28,7 +28,10 @@
     <tbody>
         {% for employee in employees %}
         <tr>
-            <td>{{ employee.baseuser_ptr.first_name }} {{ employee.baseuser_ptr.last_name }}</td>
+            <td>
+                <a href="{% url "user_profile" employee.baseuser_ptr_id %}"/>
+                {{ employee.baseuser_ptr.first_name }} {{ employee.baseuser_ptr.last_name }}
+            </td>
             <td>{{ employee.baseuser_ptr.email }}</td>
             <td>{{ employee.baseuser_ptr.phone }}</td>
             <td>{{ employee.position }}</td>

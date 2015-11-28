@@ -29,18 +29,6 @@ def project_list(request):
         return redirect('/')
 
 
-def project_details(request, project_id):
-    """Show the details of a project."""
-    if request.user.is_authenticated():
-        context = {}
-        project = Project.objects.get(id=project_id)
-        context['project'] = project
-        # context['team'] = SchoolTeam.objects.get(project_id=project_id)
-        return render(request, 'project_details.html', context)
-    else:
-        redirect('/')
-
-
 def school_list(request):
     """Show the list of Schools."""
     if request.user.is_authenticated():
@@ -241,5 +229,16 @@ def user_profile(request, user_id):
         user = BaseUser.objects.get(id=user_id)
         context['user'] = user
         return render(request, 'user_profile.html', context)
+    else:
+        redirect('/')
+
+
+def my_project(request):
+    """Show the project of current user, allow updates."""
+    if request.user.is_authenticated():
+        context = {}
+        context['teams'] = SchoolTeam.objects.filter(
+            student_members=request.user)
+        return render(request, 'my_project.html', context)
     else:
         redirect('/')

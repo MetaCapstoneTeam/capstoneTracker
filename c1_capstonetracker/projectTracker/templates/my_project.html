@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% load tz %}
+{% block content %}
+
+{% for team in teams %}
+{{ team.project.name }}
+{% endfor%}
+{% endblock %}

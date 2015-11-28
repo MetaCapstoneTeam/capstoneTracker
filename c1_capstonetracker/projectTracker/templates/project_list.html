@@ -19,8 +19,6 @@
         <tr>
             <th>Project Name</th>
             <th>Project Description</th>
-             <th>School</th>
-            <th>Project Team</th>
         </tr>
     </thead>
     <tbody>
@@ -28,9 +26,6 @@
         <tr>
             <td>{{ project.name }}</td>
             <td>{{ project.proposal }}</td>
-            <td>{{ project.school }}</td>
-            <td>{{ project.team }}</td>
-            <td><a href="{% url "project_details" project.id %}"/>Details</td>
         </tr>
         {% endfor %}
     </tbody>    

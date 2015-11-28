@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.test import TestCase
 
 from .models import Employee, Project, School, Student
-from .views import employee_list, home_page, project_details
+from .views import employee_list, home_page
 from .views import project_list, school_list, student_list
 
 
@@ -36,21 +36,6 @@ class ProjectTrackerViewsTests(TestCase):
         context = {}
         context['user'] = self.test_student
         expected_content = render_to_string('home_page.html', context)
-        self.assertEqual(
-            response.content.decode('utf8'),
-            expected_content
-        )
-
-    def test_project_details_view_returns_correct_html(self):
-        """Test that the project details view returns correct html."""
-        request = HttpRequest()
-        request.user = self.test_student
-        response = project_details(request, self.test_project.id)
-        context = {}
-        project = Project.objects.get(id=self.test_project.id)
-        context['project'] = project
-        context['user'] = self.test_student
-        expected_content = render_to_string('project_details.html', context)
         self.assertEqual(
             response.content.decode('utf8'),
             expected_content
