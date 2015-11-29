@@ -91,6 +91,11 @@ has_employee_profile, _ = Permission.objects.get_or_create(
     codename='has_employee_profile',
     content_type=admin_ct)
 
+has_project, _ = Permission.objects.get_or_create(
+    name='Has a my Project Page',
+    codename='has_project',
+    content_type=admin_ct)
+
 
 administrative_users.permissions = [can_view_teams, can_edit_teams,
                                     can_view_projects, can_edit_projects,
@@ -100,6 +105,7 @@ administrative_users.permissions = [can_view_teams, can_edit_teams,
 
 employee_users.permissions = [can_view_teams, can_view_projects,
                               can_view_employees, can_view_students,
-                              can_view_schools, has_employee_profile]
+                              can_view_schools, has_employee_profile,
+                              has_project]
 
-student_users.permissions = [has_student_profile]
+student_users.permissions = [has_student_profile, has_project]

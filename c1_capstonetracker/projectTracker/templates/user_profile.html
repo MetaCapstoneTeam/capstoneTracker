@@ -19,7 +19,9 @@
 {{ user.student.grad_semester }}
 {{ user.student.grad_year }}
 </br>
-{{ user.student.personal_picture }}
+{% if user.student.personal_picture %}
+	<img src="{{ user.student.personal_picture.url }}">
+{% endif %}
 </br>
 {{ user.student.major }}
 </br>

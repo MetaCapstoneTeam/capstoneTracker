@@ -45,7 +45,7 @@ class Student(BaseUser):
 
     """Student - Information about a Student."""
 
-    personal_picture = models.ImageField(null=True, blank=True)
+    personal_picture = models.ImageField(upload_to='../media/personal_pictures', blank=True)
     grad_semester = models.CharField(max_length=255, blank=True)
     grad_year = models.PositiveIntegerField(blank=True)
     major = models.CharField(max_length=255, blank=True)

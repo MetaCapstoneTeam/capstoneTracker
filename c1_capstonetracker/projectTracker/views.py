@@ -43,7 +43,7 @@ def student_list(request):
     """Show the list of Students."""
     if request.user.is_authenticated():
         context = {}
-        context['students'] = Student.objects.all()
+        context['students'] = Student.objects.all().order_by('last_name')
         return render(request, 'student_list.html', context)
     else:
         redirect('/')
@@ -125,7 +125,7 @@ def add_student(request):
     if request.user.is_authenticated():
         context = {}
         if request.method == 'POST':
-            form = StudentForm(request.POST)
+            form = StudentForm(request.POST, request.FILES)
             if form.is_valid():
                 BaseUser.objects.create_user(
                     username=request.POST['username'],
@@ -142,7 +142,8 @@ def add_student(request):
                     grad_semester=request.POST['grad_semester'],
                     grad_year=request.POST['grad_year'],
                     major=request.POST['major'],
-                    school=School.objects.get(id=request.POST['school']))
+                    school=School.objects.get(id=request.POST['school']),
+                    personal_picture=request.FILES['personal_picture'])
                 student.__dict__.update(auth_user.__dict__)
                 student.groups.add(student_users)
                 student.save()
