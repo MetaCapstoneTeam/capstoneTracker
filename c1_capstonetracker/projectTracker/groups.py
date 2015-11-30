@@ -50,6 +50,13 @@ can_view_schools, _ = Permission.objects.get_or_create(
     content_type=admin_ct)
 can_view_schools.save()
 
+can_view_admins, _ = Permission.objects.get_or_create(
+    name='Can View Administrators',
+    codename='can_view_admins',
+    content_type=admin_ct)
+can_view_admins.save()
+
+
 can_edit_students, _ = Permission.objects.get_or_create(
     name='Can Edit Students ',
     codename='can_edit_students',
@@ -80,6 +87,12 @@ can_edit_projects, _ = Permission.objects.get_or_create(
     content_type=admin_ct)
 can_edit_projects.save()
 
+can_edit_admins, _ = Permission.objects.get_or_create(
+    name='Can Edit Administrators ',
+    codename='can_edit_admins',
+    content_type=admin_ct)
+can_edit_admins.save()
+
 has_student_profile, _ = Permission.objects.get_or_create(
     name='Is A Student User',
     codename='has_student_profile',
@@ -101,7 +114,8 @@ administrative_users.permissions = [can_view_teams, can_edit_teams,
                                     can_view_projects, can_edit_projects,
                                     can_view_employees, can_edit_employees,
                                     can_view_students, can_edit_students,
-                                    can_view_schools, can_edit_schools]
+                                    can_view_schools, can_edit_schools,
+                                    can_view_admins, can_edit_admins]
 
 employee_users.permissions = [can_view_teams, can_view_projects,
                               can_view_employees, can_view_students,

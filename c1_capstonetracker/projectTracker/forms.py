@@ -34,6 +34,16 @@ class EmployeeForm(ModelForm):
                   'position', 'username', 'password']
 
 
+class AdministratorForm(ModelForm):
+
+    """Administrator Form class."""
+
+    class Meta:
+        model = Administrator
+        fields = ['first_name', 'last_name', 'email', 'phone',
+                  'position', 'username', 'password']
+
+
 class SchoolForm(ModelForm):
 
     """School Form class."""
@@ -52,3 +62,12 @@ class SchoolTeamForm(ModelForm):
         model = SchoolTeam
         fields = ['student_members', 'employee_members', 'school',
                   'project', 'semester', 'year']
+
+
+class UpdateForm(ModelForm):
+
+    """Update Form clss."""
+
+    class Meta:
+        model = Update
+        fields = ['subject', 'message', 'extra_info']

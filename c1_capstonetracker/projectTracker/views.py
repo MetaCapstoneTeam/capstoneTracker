@@ -1,11 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
-# from django.contrib.auth.models import Group
 from django.shortcuts import redirect, render
 
-from .forms import EmployeeForm, ProjectForm, SchoolForm
+from .forms import AdministratorForm, EmployeeForm, ProjectForm, SchoolForm
 from .forms import SchoolTeamForm, StudentForm
 from .groups import *
-from .models import BaseUser, Employee, Project, School, SchoolTeam, Student
+from .models import Administrator, BaseUser, Employee, Project, School
+from .models import SchoolTeam, Student
 
 
 def home_page(request):
@@ -65,6 +65,16 @@ def team_list(request):
         context = {}
         context['teams'] = SchoolTeam.objects.all()
         return render(request, 'team_list.html', context)
+    else:
+        redirect('/')
+
+
+def admin_list(request):
+    """Show the list of teams."""
+    if request.user.is_authenticated():
+        context = {}
+        context['admins'] = Administrator.objects.all()
+        return render(request, 'admin_list.html', context)
     else:
         redirect('/')
 
@@ -157,6 +167,39 @@ def add_student(request):
         redirect('/')
 
 
+def add_admin(request):
+    """Add Administrator."""
+    if request.user.is_authenticated():
+        context = {}
+        if request.method == 'POST':
+            form = AdministratorForm(request.POST)
+            if form.is_valid():
+                BaseUser.objects.create_user(
+                    username=request.POST['username'],
+                    password=request.POST['password'],
+                    first_name=request.POST['first_name'],
+                    last_name=request.POST['last_name'],
+                    email=request.POST['email'],
+                    phone=request.POST['phone'])
+                auth_user = authenticate(
+                    username=request.POST['username'],
+                    password=request.POST['password'])
+                admin = Administrator(baseuser_ptr_id=auth_user.id,
+                                      position=request.POST['position'])
+                admin.__dict__.update(auth_user.__dict__)
+                admin.groups.add(administrative_users)
+                admin.save()
+                return redirect('/projectTracker/administratorlist/')
+            else:
+                context['form'] = form
+        else:
+            context['form'] = AdministratorForm()
+        context['admins'] = Administrator.objects.all()
+        return render(request, 'add_admin.html', context)
+    else:
+        redirect('/')
+
+
 def add_project(request):
     """Add project."""
     if request.user.is_authenticated():
@@ -192,6 +235,24 @@ def add_team(request):
             context['form'] = SchoolTeamForm()
         context['teams'] = SchoolTeam.objects.all()
         return render(request, 'add_team.html', context)
+    else:
+        redirect('/')
+
+
+def add_update(request):
+    """Add update."""
+    if request.user.is_authenticated():
+        context = {}
+        if request.method == 'POST':
+            form = UpdateForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('projectTracker/teamlist/')
+            else:
+                context['form'] = form
+        else:
+            context['form'] = UpdateForm()
+        return render(request, 'add_update.html', context)
     else:
         redirect('/')
 

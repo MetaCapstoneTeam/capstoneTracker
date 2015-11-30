@@ -30,14 +30,12 @@
             <td>{{ team.school.name }}</td>
             <td>
                 {% for stud in team.student_members.all %}
-                {{ stud.first_name }} {{ stud.last_name }}
-                <br>
+                <p>{{ stud.first_name }} {{ stud.last_name }}</p>
                 {% endfor %}
             </td>
             <td>
                 {% for emp in team.employee_members.all %}
-                {{ emp.first_name }} {{ emp.last_name }}
-                <br>
+                <p>{{ emp.first_name }} {{ emp.last_name }}</p>
                 {% endfor %}
             </td>
         </tr>

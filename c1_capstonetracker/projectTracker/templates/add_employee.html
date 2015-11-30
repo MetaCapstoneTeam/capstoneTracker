@@ -2,11 +2,11 @@
 {% block content %}
 
 <form class="add_form"; method="post">
-	<div type='container' align="center">
-		<h1 align="center"> Add Employee </h1>
-		{% csrf_token %}
-		{{ form }}
-		<input type="submit" value="Submit"/>
-	</div>
+    <div type='container' align="center">
+        <h1 align="center"> Add Employee </h1>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit"/>
+    </div>
 </form>
 {% endblock %}

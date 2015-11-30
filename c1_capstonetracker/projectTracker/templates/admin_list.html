@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load tz %}
+{% block content %}
+
+<div id ="content-wrapper">
+<table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
+    <td> </td> 
+    {% if perms.projectTracker.can_edit_admins %}
+    <td><a href="{% url "add_admin" %}"> + Add </a></td></table>
+    {% endif %}
+<table align = 'center',border=1>
+    <colgroup>
+    <col width="25%">
+    <col width="25%">
+    <col width="25%">
+    <col width="25%">
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Administrator Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Position</th>
+            <th>Username</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for admin in admins %}
+        <tr>
+            <td>
+                <a href="{% url "user_profile" admin.baseuser_ptr_id %}"/>
+                {{ admin.baseuser_ptr.first_name }} {{ admin.baseuser_ptr.last_name }}
+            </td>
+            <td>{{ admin.baseuser_ptr.email }}</td>
+            <td>{{ admin.baseuser_ptr.phone }}</td>
+            <td>{{ admin.position }}</td>
+            <td>{{ admin.username }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>    
+</table>
+</div>
+
+{% endblock %}

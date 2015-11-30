@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form class="add_form"; method="post">
+<form class='add_form'; method="post" enctype='multipart/form-data'>
     <div type='container' align="center">
-        <h1> Add Project </h1>
+        <h1> Add Administrator </h1>
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit"/>

@@ -7,7 +7,7 @@
     
 <table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
     <td> </td> 
-    {% if perms.projectTracker.can_add_student %} 
+    {% if perms.projectTracker.can_edit_students %} 
     <td><a href="{% url "add_student" %}"> + Add </a></td></table>
     {% endif %}
 <table align = 'center',border=1>

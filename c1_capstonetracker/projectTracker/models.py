@@ -45,7 +45,8 @@ class Student(BaseUser):
 
     """Student - Information about a Student."""
 
-    personal_picture = models.ImageField(upload_to='../media/personal_pictures', blank=True)
+    personal_picture = models.ImageField(
+        upload_to='../media/personal_pictures', blank=True, null=True)
     grad_semester = models.CharField(max_length=255, blank=True)
     grad_year = models.PositiveIntegerField(blank=True)
     major = models.CharField(max_length=255, blank=True)
@@ -75,9 +76,11 @@ class Administrator(BaseUser):
         verbose_name = 'administrator'
 
 
-# class Update(models.Model):
+class Update(models.Model):
 
     """Update - the submission of group updates about their projects."""
 
-    # subject = models.CharField(max_length=255)
-    # message = models.TextField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    extra_info = models.FileField(upload_to='../project/updates')
+    project = models.ForeignKey('project')

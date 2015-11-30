@@ -4,6 +4,19 @@
 {% block content %}
 
 {% for team in teams %}
-{{ team.project.name }}
+    <h3>Project Name</h3>
+    {{ team.project.name }}
+    <h3>Student Members</h3>
+    {% for student in team.student_members.all %}
+        <a href="{% url "user_profile" student.baseuser_ptr_id %}">
+            <p>{{ student.last_name }}, {{ student.first_name }}</p>
+        </a>
+    {% endfor %}
+    <h3>Employee Members</h3>
+    {% for employee in team.employee_members.all %}
+        <a href="{% url "user_profile" employee.baseuser_ptr_id %}">
+            <p>{{ employee.last_name }}, {{ employee.first_name }}</p>
+        </a>
+    {% endfor %}
 {% endfor%}
 {% endblock %}

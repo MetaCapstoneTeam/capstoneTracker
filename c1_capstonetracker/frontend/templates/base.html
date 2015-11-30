@@ -67,6 +67,12 @@
             {% if request.get_full_path == home_url %} class="active"
             {% endif %} href="{% url "team_list" %}"> Teams</a></li>
         {% endif %}
+        {% if perms.projectTracker.can_view_admins %}
+        <li><a 
+            {% url 'admin_list' as home_url %}
+            {% if request.get_full_path == home_url %} class="active"
+            {% endif %} href="{% url "admin_list" %}">Administrators</a></li>
+        {% endif %}
         {% if perms.projectTracker.has_project %}
         <li><a 
             {% url 'my_project' as home_url %}
