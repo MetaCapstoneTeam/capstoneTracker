@@ -20,7 +20,6 @@
     {% endfor %}
     <h3>Updates</h3>
     {% for update in team.updates %}
-
         <p>{{ update.subject }} {{ update.message }} <a href="{{ update.extra_info.url }}">{{ update.extra_info }}</a></p>
     {% empty %}
         <p>There are no updates</p>
