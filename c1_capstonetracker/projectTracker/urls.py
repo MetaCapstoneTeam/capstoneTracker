@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^addproject/$', add_project, name='add_project'),
     url(r'^addTeam/$', add_team, name='add_team'),
     url(r'^addadmin/$', add_admin, name='add_admin'),
+    url(r'^addupdate/([0-9]+)/', add_update, name='add_update'),
     url(r'^$', logout_user, name='logout_user'),
 ]

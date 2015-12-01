@@ -2,10 +2,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect, render
 
 from .forms import AdministratorForm, EmployeeForm, ProjectForm, SchoolForm
-from .forms import SchoolTeamForm, StudentForm
+from .forms import SchoolTeamForm, StudentForm, UpdateForm
 from .groups import *
 from .models import Administrator, BaseUser, Employee, Project, School
-from .models import SchoolTeam, Student
+from .models import SchoolTeam, Student, Update
 
 
 def home_page(request):
@@ -239,15 +239,20 @@ def add_team(request):
         redirect('/')
 
 
-def add_update(request):
+def add_update(request, project_id):
     """Add update."""
     if request.user.is_authenticated():
         context = {}
         if request.method == 'POST':
-            form = UpdateForm(request.POST)
+            form = UpdateForm(request.POST, request.FILES)
             if form.is_valid():
-                form.save()
-                return redirect('projectTracker/teamlist/')
+                update = Update(
+                    subject=request.POST['subject'],
+                    message=request.POST['message'],
+                    extra_info=request.FILES['extra_info'],
+                    project=Project.objects.get(id=project_id))
+                update.save()
+                return redirect('my_project')
             else:
                 context['form'] = form
         else:
@@ -299,12 +304,17 @@ def my_project(request):
     """Show the project of current user, allow updates."""
     if request.user.is_authenticated():
         context = {}
+
         if SchoolTeam.objects.filter(student_members=request.user):
-            context['teams'] = SchoolTeam.objects.filter(
-                student_members=request.user)
+            teams = list(SchoolTeam.objects.filter(
+                student_members=request.user))
         else:
-            context['teams'] = SchoolTeam.objects.filter(
-                employee_members=request.user)
+            teams = list(SchoolTeam.objects.filter(
+                employee_members=request.user))
+        for team in range(len(teams)):
+            teams[team].updates = list(Update.objects.filter(project_id=teams[team].project_id))
+        context['teams'] = teams
+        print(context)
         return render(request, 'my_project.html', context)
     else:
         redirect('/')

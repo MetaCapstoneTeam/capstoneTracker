@@ -21,6 +21,9 @@ class SchoolTeam(models.Model):
     semester = models.CharField(max_length=255, blank=True)
     year = models.PositiveIntegerField()
 
+    def __str__(self):
+        return self.project.name
+
 
 class School(models.Model):
 
@@ -46,7 +49,7 @@ class Student(BaseUser):
     """Student - Information about a Student."""
 
     personal_picture = models.ImageField(
-        upload_to='../media/personal_pictures', blank=True, null=True)
+        upload_to='personal_pictures', blank=True, null=True)
     grad_semester = models.CharField(max_length=255, blank=True)
     grad_year = models.PositiveIntegerField(blank=True)
     major = models.CharField(max_length=255, blank=True)
@@ -82,5 +85,5 @@ class Update(models.Model):
 
     subject = models.CharField(max_length=255)
     message = models.TextField()
-    extra_info = models.FileField(upload_to='../project/updates')
+    extra_info = models.FileField(upload_to='updates')
     project = models.ForeignKey('project')
