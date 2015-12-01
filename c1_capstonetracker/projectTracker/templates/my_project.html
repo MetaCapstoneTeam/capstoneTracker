@@ -2,30 +2,51 @@
 
 {% load tz %}
 {% block content %}
+<div id ="content-wrapper">
+    {% for team in teams %}
+    <h2 class="project-name">{{ team.project.name }}</h2>
+            
+        <div class="project-divide">
+            <div class="description">
+            <h2 class="content-title">Description</h2>
+            {{ team.project.proposal }}
+            </div>
 
-{% for team in teams %}
-    <h3>Project Name</h3>
-    {{ team.project.name }}
-    <h3>Student Members</h3>
-    {% for student in team.student_members.all %}
-        <a href="{% url "user_profile" student.baseuser_ptr_id %}">
-            <p>{{ student.last_name }}, {{ student.first_name }}</p>
-        </a>
-    {% endfor %}
-    <h3>Employee Members</h3>
-    {% for employee in team.employee_members.all %}
-        <a href="{% url "user_profile" employee.baseuser_ptr_id %}">
-            <p>{{ employee.last_name }}, {{ employee.first_name }}</p>
-        </a>
-    {% endfor %}
-    <h3>Updates</h3>
-    {% for update in team.updates %}
-        <p>{{ update.subject }} {{ update.message }} <a href="{{ update.extra_info.url }}">{{ update.extra_info }}</a></p>
-    {% empty %}
-        <p>There are no updates</p>
-    {% endfor %}
+            <table class = "project-table">
+                 <colgroup>
+                 <col width="33%">
+                 <col width="34%">
+                 <col width="33%">
+                 </colgroup>
+                 <tr><td>
+                <h2 class="content-title">Student Members</h2>
+                {% for student in team.student_members.all %}
+                    <a href="{% url "user_profile" student.baseuser_ptr_id %}">
+                        <p>{{ student.last_name }}, {{ student.first_name }}</p>
+                    </a>
+                {% endfor %}
+                </td>
+                <td style="border-left: #004977 1px solid; border-right: #004977 1px solid;">
+                <h2 class="content-title">Employee Members</h2>
+                {% for employee in team.employee_members.all %}
+                    <a href="{% url "user_profile" employee.baseuser_ptr_id %}">
+                        <p>{{ employee.last_name }}, {{ employee.first_name }}</p>
+                    </a>
+                {% endfor %}
+            </td><td>
+                <h2 class="content-title">Updates</h2>
+                {% for update in team.updates %}
+                    <p>{{ update.subject }} {{ update.message }} <a href="{{ update.extra_info.url }}">{{ update.extra_info }}</a></p>
+                {% empty %}
+                    <p>There are no updates</p>
+                {% endfor %}
 
-        <a href="{% url "add_update" team.project_id %}"> Add Update + </a> 
-{% endfor %}
+                <a href="{% url "add_update" team.project_id %}"> Add Update + </a> 
+            </td>
+            </tr>
+            </table>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

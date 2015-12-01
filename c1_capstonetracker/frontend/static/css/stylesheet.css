@@ -264,3 +264,37 @@ td {
   font-size: 10px;
   color: #979797;
 }
+
+.project-divide{
+  border: #004977 3px solid;
+  margin-bottom: 10px;
+  clear: left;
+  padding: 10px;
+}
+
+.project-divide .description{
+  padding-bottom: 20px;
+  border-bottom: #004977 1px solid;
+}
+
+
+.project-table {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.project-table, .project-table td {
+  vertical-align: top; 
+  border: none;
+  padding: 10px;
+  text-align: center;
+}
+
+
+.project-name{
+  font-size: 24px;
+  color: #004977;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  float: left;
+}
