@@ -15,7 +15,6 @@ def home_page(request):
         context = {}
         context['user'] = request.user
         return render(request, 'home_page.html', context)
-
     else:
         return redirect('/')
 
@@ -316,8 +315,6 @@ def my_project(request):
                 employee_members=request.user))
         for team in range(len(teams)):
             teams[team].updates = list(Update.objects.filter(team=teams[team]).order_by('-timestamp'))
-            print("hi")
-            print(teams[team].updates)
         context['teams'] = teams
         
         return render(request, 'my_project.html', context)

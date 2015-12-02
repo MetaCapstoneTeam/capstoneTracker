@@ -44,7 +44,6 @@ class BaseUser(AbstractUser):
     """Base User - Information about a User."""
 
     phone = models.CharField(max_length=10, blank=True)
-    school_team = models.ForeignKey('SchoolTeam', null=True)
 
 
 class Student(BaseUser):
