@@ -8,6 +8,7 @@ class Project(models.Model):
 
     name = models.CharField(max_length=255, null=True)
     proposal = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 
 class SchoolTeam(models.Model):
@@ -20,6 +21,7 @@ class SchoolTeam(models.Model):
     project = models.ForeignKey('Project')
     semester = models.CharField(max_length=255, blank=True)
     year = models.PositiveIntegerField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.project.name
@@ -34,6 +36,7 @@ class School(models.Model):
     contact_last_name = models.CharField(max_length=255)
     contact_email = models.EmailField()
     contact_phone = models.CharField(max_length=10, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 
 class BaseUser(AbstractUser):
@@ -54,6 +57,7 @@ class Student(BaseUser):
     grad_year = models.PositiveIntegerField(blank=True)
     major = models.CharField(max_length=255, blank=True)
     school = models.ForeignKey('School')
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'student'
@@ -64,6 +68,7 @@ class Employee(BaseUser):
     """Employee - Information about a Employee."""
 
     position = models.CharField(max_length=255, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'employee'
@@ -74,6 +79,7 @@ class Administrator(BaseUser):
     """Administrator - Information about Admin Users."""
 
     position = models.CharField(max_length=255, blank=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = 'administrator'
@@ -85,5 +91,6 @@ class Update(models.Model):
 
     subject = models.CharField(max_length=255)
     message = models.TextField()
-    extra_info = models.FileField(upload_to='updates')
-    project = models.ForeignKey('project')
+    extra_info = models.FileField(upload_to='updates', blank=True, null=True)
+    team = models.ForeignKey('SchoolTeam')
+    timestamp = models.DateTimeField(auto_now_add=True)
