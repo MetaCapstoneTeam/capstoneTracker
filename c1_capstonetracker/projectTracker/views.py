@@ -3,10 +3,11 @@ from django.shortcuts import redirect, render
 
 from .forms import AdministratorForm, EmployeeForm, ProjectForm, SchoolForm
 from .forms import SchoolTeamForm, StudentForm, UpdateForm
-from .groups import *
+
 from .models import Administrator, BaseUser, Employee, Project, School
 from .models import SchoolTeam, Student, Update
 
+from .groups import *
 
 def home_page(request):
     """Show the home page."""
@@ -118,7 +119,7 @@ def add_employee(request):
                 employee = Employee(baseuser_ptr_id=auth_user.id,
                                     position=request.POST['position'])
                 employee.__dict__.update(auth_user.__dict__)
-                employee.groups.add(employee_users)
+                employee.groups.add(employee_users())
                 employee.save()
                 return redirect('/projectTracker/employeelist/')
             else:
@@ -153,9 +154,9 @@ def add_student(request):
                     grad_year=request.POST['grad_year'],
                     major=request.POST['major'],
                     school=School.objects.get(id=request.POST['school']),
-                    personal_picture=request.FILES['personal_picture'])
+                    personal_picture=request.FILES.get('personal_picture',None))
                 student.__dict__.update(auth_user.__dict__)
-                student.groups.add(student_users)
+                student.groups.add(student_users())
                 student.save()
                 return redirect('/projectTracker/studentlist/')
             else:
@@ -187,7 +188,7 @@ def add_admin(request):
                 admin = Administrator(baseuser_ptr_id=auth_user.id,
                                       position=request.POST['position'])
                 admin.__dict__.update(auth_user.__dict__)
-                admin.groups.add(administrative_users)
+                admin.groups.add(administrative_users())
                 admin.save()
                 return redirect('/projectTracker/administratorlist/')
             else:
@@ -239,7 +240,7 @@ def add_team(request):
         redirect('/')
 
 
-def add_update(request, project_id):
+def add_update(request, team_id):
     """Add update."""
     if request.user.is_authenticated():
         context = {}
@@ -249,8 +250,8 @@ def add_update(request, project_id):
                 update = Update(
                     subject=request.POST['subject'],
                     message=request.POST['message'],
-                    extra_info=request.FILES['extra_info'],
-                    project=Project.objects.get(id=project_id))
+                    extra_info=request.FILES.get('extra_info', None),
+                    team=SchoolTeam.objects.get(id=team_id))
                 update.save()
                 return redirect('my_project')
             else:
@@ -312,7 +313,7 @@ def my_project(request):
             teams = list(SchoolTeam.objects.filter(
                 employee_members=request.user))
         for team in range(len(teams)):
-            teams[team].updates = list(Update.objects.filter(project_id=teams[team].project_id))
+            teams[team].updates = list(SchoolTeam.objects.filter(id=teams[team].id))
         context['teams'] = teams
         print(context)
         return render(request, 'my_project.html', context)
