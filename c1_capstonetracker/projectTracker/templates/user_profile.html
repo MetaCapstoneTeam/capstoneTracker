@@ -8,7 +8,7 @@
          <h2 class="content-title">Email: </h2> <a href="mailto:{{ user.email }}">{{ user.email }}</a>
          <h2 class="content-title">Username: </h2> {{ user.username }}
          <h2 class="content-title">Phone number: </h2> {{ user.phone }}
-		{% if perms.projectTracker.has_student_profile %}
+		{% if is_student %}
 			<h2 class="content-title">Expected Graduation: </h2> {{ user.student.grad_semester }} 
 			{{ user.student.grad_year }}
 			{% if user.student.personal_picture %}
@@ -18,7 +18,7 @@
 			<h2 class="content-title">School: </h2> {{ user.student.school.name }}
 		{% endif %}
 
-		{% if perms.projectTracker.has_employee_profile %}
+		{% if is_employee %}
 			<h2 class="content-title">Position: </h2> {{ user.employee.position }}
 		{% endif %}
 	</div>

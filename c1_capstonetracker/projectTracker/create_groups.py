@@ -110,18 +110,3 @@ has_project = Permission.objects.create(
     codename='has_project',
     content_type=admin_ct)
 has_project.save()
-
-
-administrative_users.permissions = [can_view_teams, can_edit_teams,
-                                    can_view_projects, can_edit_projects,
-                                    can_view_employees, can_edit_employees,
-                                    can_view_students, can_edit_students,
-                                    can_view_schools, can_edit_schools,
-                                    can_view_admins, can_edit_admins]
-
-employee_users.permissions = [can_view_teams, can_view_projects,
-                              can_view_employees, can_view_students,
-                              can_view_schools, has_employee_profile,
-                              has_project]
-
-student_users.permissions = [has_student_profile, has_project]

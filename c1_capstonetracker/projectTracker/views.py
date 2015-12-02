@@ -296,6 +296,8 @@ def user_profile(request, user_id):
         context = {}
         user = BaseUser.objects.get(id=user_id)
         context['user'] = user
+        context['is_student'] = user.has_perm('projectTracker.has_student_profile')
+        context['is_employee'] = user.has_perm('projectTracker.has_employee_profile')
         return render(request, 'user_profile.html', context)
     else:
         redirect('/')
@@ -313,9 +315,11 @@ def my_project(request):
             teams = list(SchoolTeam.objects.filter(
                 employee_members=request.user))
         for team in range(len(teams)):
-            teams[team].updates = list(SchoolTeam.objects.filter(id=teams[team].id))
+            teams[team].updates = list(Update.objects.filter(team=teams[team]).order_by('-timestamp'))
+            print("hi")
+            print(teams[team].updates)
         context['teams'] = teams
-        print(context)
+        
         return render(request, 'my_project.html', context)
     else:
         redirect('/')

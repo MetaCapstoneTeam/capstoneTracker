@@ -4,7 +4,7 @@
 <form  class="add_form"; method="post">
 <div type='container' align="center">
 {% csrf_token %}
-{{ form }}
+{{ form.as_ul }}
 <input type="submit" value="Submit"/>
 
 </div>

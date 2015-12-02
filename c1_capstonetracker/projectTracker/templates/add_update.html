@@ -5,7 +5,7 @@
     <div type='container' align="center">
         <h1> Update </h1>
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_ul }}
         <input type="submit" value="Submit"/>
     </div>
 </form>
