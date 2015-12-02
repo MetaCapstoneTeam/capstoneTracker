@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projectTracker', '0002_administrator'),
+        ('projectTracker', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='school',
-            name='contact_phone',
-            field=models.CharField(max_length=10, blank=True),
+            model_name='update',
+            name='extra_info',
+            field=models.FileField(null=True, blank=True, upload_to='updates'),
         ),
     ]
