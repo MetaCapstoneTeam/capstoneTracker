@@ -27,12 +27,6 @@
     </div>
     <div class="nav">
       <ul>
-        
-        <li><a 
-            {% url 'home_page' as home_url %}
-            {% if request.get_full_path == home_url %} class="active" 
-            {% endif %} href="{% url "home_page" %}">Home</a></li>
-
         {% if perms.projectTracker.can_view_students %}
         <li> <a 
             {% url 'student_list' as home_url %}

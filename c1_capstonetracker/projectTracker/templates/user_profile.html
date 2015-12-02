@@ -3,24 +3,24 @@
 {% load tz %}
 {% block content %}
 <div id ="content-wrapper">
-	<h2 class="project-name">{{ user.first_name }}  {{ user.last_name }}</h2>
+    <h2 class="project-name">{{ user.first_name }}  {{ user.last_name }}</h2>
     <div class="project-divide">
          <h2 class="content-title">Email: </h2> <a href="mailto:{{ user.email }}">{{ user.email }}</a>
          <h2 class="content-title">Username: </h2> {{ user.username }}
          <h2 class="content-title">Phone number: </h2> {{ user.phone }}
-		{% if is_student %}
-			<h2 class="content-title">Expected Graduation: </h2> {{ user.student.grad_semester }} 
-			{{ user.student.grad_year }}
-			{% if user.student.personal_picture %}
-				<img src="{{ user.student.personal_picture.url }}">
-			{% endif %}
-			<h2 class="content-title">Major: </h2> {{ user.student.major }}
-			<h2 class="content-title">School: </h2> {{ user.student.school.name }}
-		{% endif %}
+        {% if is_student %}
+            <h2 class="content-title">Expected Graduation: </h2> {{ user.student.grad_semester }} 
+            {{ user.student.grad_year }}
+            {% if user.student.personal_picture %}
+                <img src="{{ user.student.personal_picture.url }}">
+            {% endif %}
+            <h2 class="content-title">Major: </h2> {{ user.student.major }}
+            <h2 class="content-title">School: </h2> {{ user.student.school.name }}
+        {% endif %}
 
-		{% if is_employee %}
-			<h2 class="content-title">Position: </h2> {{ user.employee.position }}
-		{% endif %}
-	</div>
+        {% if is_employee %}
+            <h2 class="content-title">Position: </h2> {{ user.employee.position }}
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

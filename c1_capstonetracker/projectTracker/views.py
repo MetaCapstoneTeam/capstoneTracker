@@ -4,19 +4,10 @@ from django.shortcuts import redirect, render
 from .forms import AdministratorForm, EmployeeForm, ProjectForm, SchoolForm
 from .forms import SchoolTeamForm, StudentForm, UpdateForm
 
-from .models import Administrator, BaseUser, Employee, Project, School
-from .models import SchoolTeam, Student, Update
-
 from .groups import *
 
-def home_page(request):
-    """Show the home page."""
-    if request.user.is_authenticated():
-        context = {}
-        context['user'] = request.user
-        return render(request, 'home_page.html', context)
-    else:
-        return redirect('/')
+from .models import Administrator, BaseUser, Employee, Project, School
+from .models import SchoolTeam, Student, Update
 
 
 def project_list(request):
@@ -116,7 +107,10 @@ def add_employee(request):
                     username=request.POST['username'],
                     password=request.POST['password'])
                 employee = Employee(baseuser_ptr_id=auth_user.id,
-                                    position=request.POST['position'])
+                                    position=request.POST['position'],
+                                    personal_picture=request.FILES.get(
+                                        'personal_picture',
+                                        'image-not-available.jpg'))
                 employee.__dict__.update(auth_user.__dict__)
                 employee.groups.add(employee_users())
                 employee.save()
@@ -153,7 +147,9 @@ def add_student(request):
                     grad_year=request.POST['grad_year'],
                     major=request.POST['major'],
                     school=School.objects.get(id=request.POST['school']),
-                    personal_picture=request.FILES.get('personal_picture',None))
+                    personal_picture=request.FILES.get(
+                        'personal_picture',
+                        'image-not-available.jpg'))
                 student.__dict__.update(auth_user.__dict__)
                 student.groups.add(student_users())
                 student.save()
@@ -274,7 +270,10 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('home_page')
+                if user.has_perm('projectTracker.has_project'):
+                    return redirect('my_project')
+                else:
+                    return redirect('admin_list')
             else:
                 state = "Your account is not active, contact the admin. "
         else:
@@ -295,8 +294,10 @@ def user_profile(request, user_id):
         context = {}
         user = BaseUser.objects.get(id=user_id)
         context['user'] = user
-        context['is_student'] = user.has_perm('projectTracker.has_student_profile')
-        context['is_employee'] = user.has_perm('projectTracker.has_employee_profile')
+        context['is_student'] = user.has_perm(
+            'projectTracker.has_student_profile')
+        context['is_employee'] = user.has_perm(
+            'projectTracker.has_employee_profile')
         return render(request, 'user_profile.html', context)
     else:
         redirect('/')
@@ -314,9 +315,9 @@ def my_project(request):
             teams = list(SchoolTeam.objects.filter(
                 employee_members=request.user))
         for team in range(len(teams)):
-            teams[team].updates = list(Update.objects.filter(team=teams[team]).order_by('-timestamp'))
+            teams[team].updates = list(Update.objects.filter(
+                team=teams[team]).order_by('-timestamp'))
         context['teams'] = teams
-        
         return render(request, 'my_project.html', context)
     else:
         redirect('/')

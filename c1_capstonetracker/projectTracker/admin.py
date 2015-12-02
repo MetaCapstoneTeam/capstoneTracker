@@ -2,10 +2,12 @@ from django.contrib import admin
 
 from .models import *
 
+
 class UpdateAdmin(admin.ModelAdmin):
 
-	"""Update Admin"""
-	pass
+    """Update Admin."""
+
+    pass
 
 
 admin.site.register(Student)
@@ -15,4 +17,3 @@ admin.site.register(SchoolTeam)
 admin.site.register(Employee)
 admin.site.register(Update, UpdateAdmin)
 admin.site.register(Administrator)
-
