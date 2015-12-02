@@ -35,11 +35,13 @@
                 {% endfor %}
             </td><td>
                 <h2 class="content-title">Updates</h2>
+                <div class="text-field">
                 {% for update in team.updates %}
-                    <p>{{ update.subject }} {{ update.message }} <a href="{{ update.extra_info.url }}">{{ update.extra_info }}</a></p>
+                    <p><b>{{ update.subject }}</b></br> {{ update.message }} </br> <a class="button" href="{{ update.extra_info.url }}">Attached File</a></p>
                 {% empty %}
                     <p>There are no updates</p>
                 {% endfor %}
+                </div>
 
                 <a href="{% url "add_update" team.project_id %}"> Add Update + </a> 
             </td>
