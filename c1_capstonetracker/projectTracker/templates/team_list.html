@@ -4,7 +4,7 @@
 {% block content %}
 <div id ="content-wrapper">
 <table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
-    <td> </td> 
+    <td> <input type="text" id="filter" placeholder="Type to Search.."/> </td> 
     {% if perms.projectTracker.can_edit_employees %}
     <td><a href="{% url "add_team" %}"> + Add </a></td></table>
     {% endif %}

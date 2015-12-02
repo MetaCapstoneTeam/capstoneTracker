@@ -8,6 +8,7 @@
         <link href='http://fonts.googleapis.com/css?family=Syncopate' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Maven+Pro' rel='stylesheet' type='text/css'>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <title>Capital One Capstone</title>
 </head>
 
@@ -89,5 +90,32 @@
     </div>
 
 </body>
+
+<script>
+ // Function
+ function filterTable(value) {
+     if (value != "") {
+         $("#table td:contains-ci('" + value + "')").parent("tr").show();
+     }
+ }
+
+ // jQuery expression for case-insensitive filter
+ $.extend($.expr[":"], {
+     "contains-ci": function (elem, i, match, array) {
+         return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+     }
+ });
+
+ // Event listener
+ $('#filter').on('keyup', function () {
+     if ($(this).val() == '') {
+         $("#table tbody > tr").show();
+     } else {
+         $("#table > tbody > tr").hide();
+         var filters = $(this).val().split(' ');
+         filters.map(filterTable);
+     }
+ });
+</script>
 
 </html>
