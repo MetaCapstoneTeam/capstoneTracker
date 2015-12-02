@@ -267,7 +267,7 @@ td {
 
 .project-divide{
   border: #004977 3px solid;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   clear: left;
   padding: 10px;
 }
@@ -296,6 +296,8 @@ td {
 
 .project-table td .text-field p {
   border-bottom: #000 1px dotted;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .project-table a {
@@ -318,10 +320,11 @@ td {
     color: #000;
     font-size: 12px;
     padding: 4px;
+    margin-bottom: 3px;
 }
 
 .project-name{
-  font-size: 24px;
+  font-size: 32px;
   color: #004977;
   margin-bottom: 0px;
   margin-top: 5px;
