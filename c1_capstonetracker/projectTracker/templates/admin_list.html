@@ -5,7 +5,7 @@
 
 <div id ="content-wrapper">
 <table class = 'top-table'>  <colgroup><col width="75%"><col width="25%"> </colgroup> 
-    <td> <input type="text" id="filter" placeholder="Type to Search.."/> </td> 
+    <td> <input type="text" id="filter" placeholder="Type to search.."/> </td> 
     {% if perms.projectTracker.can_edit_admins %}
     <td><a href="{% url "add_admin" %}"> + Add </a></td></table>
     {% endif %}
@@ -22,7 +22,6 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Position</th>
-            <th>Username</th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +34,6 @@
             <td>{{ admin.baseuser_ptr.email }}</td>
             <td>{{ admin.baseuser_ptr.phone }}</td>
             <td>{{ admin.position }}</td>
-            <td>{{ admin.username }}</td>
         </tr>
         {% endfor %}
     </tbody>    
