@@ -21,9 +21,8 @@
 
                 </div>
         </div>
-
         <div id="container">
-                {{ state }}
+            <div style="font-size: 14px; margin-top: 10px; margin-bottom: 10px;"> {{ state }} </div>
                 <form  action="/login/" method="post">
                     {% csrf_token %}
                     <input type="text" placeholder="Username" id="username" name="username" value="{{ username }}">

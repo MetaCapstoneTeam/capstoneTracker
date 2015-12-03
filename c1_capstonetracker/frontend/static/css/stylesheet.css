@@ -10,6 +10,11 @@
   display: inline-block;
 }
 
+a {
+  color: #d22f33;
+  text-decoration: none;
+}
+
 body{
   background-color: white;
   padding: 0;
@@ -39,7 +44,7 @@ h1{
   height: 30px;
   border-bottom: 1px solid #888;
 }
- 
+
 .nav a {
   text-decoration: none;
   color: #fff;
@@ -105,7 +110,7 @@ h1{
 }
 
 .content-title {
-  font-size: 24px;
+  font-size: 20px;
   color: #004977;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -220,6 +225,7 @@ td {
   margin-bottom: 20px;
   clear: left;
   padding: 10px;
+  min-height: 310px;
 }
 
 .project-divide .description{
@@ -286,3 +292,8 @@ td {
   height:20px;
 }
 
+.prof-pic {
+  max-height: 300px;
+  max-width: 300px;
+  float: right;
+}

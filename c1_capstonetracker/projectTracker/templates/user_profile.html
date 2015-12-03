@@ -5,15 +5,18 @@
 <div id ="content-wrapper">
     <h2 class="project-name">{{ user.first_name }}  {{ user.last_name }}</h2>
     <div class="project-divide">
+    	{% if is_employee %}
+            <img class="prof-pic" src="{{ user.employee.personal_picture.url }}">
+        {% endif %}
+    	{% if is_student %}
+            <img class="prof-pic" src="{{ user.student.personal_picture.url }}">
+        {% endif %}
          <h2 class="content-title">Email: </h2> <a href="mailto:{{ user.email }}">{{ user.email }}</a>
          <h2 class="content-title">Username: </h2> {{ user.username }}
          <h2 class="content-title">Phone number: </h2> {{ user.phone }}
         {% if is_student %}
             <h2 class="content-title">Expected Graduation: </h2> {{ user.student.grad_semester }} 
             {{ user.student.grad_year }}
-            {% if user.student.personal_picture %}
-                <img src="{{ user.student.personal_picture.url }}">
-            {% endif %}
             <h2 class="content-title">Major: </h2> {{ user.student.major }}
             <h2 class="content-title">School: </h2> {{ user.student.school.name }}
         {% endif %}
