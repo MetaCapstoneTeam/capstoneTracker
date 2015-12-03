@@ -141,19 +141,23 @@ def add_student(request):
                 auth_user = authenticate(
                     username=request.POST['username'],
                     password=request.POST['password'])
-                student = Student(
-                    baseuser_ptr_id=auth_user.id,
-                    grad_semester=request.POST['grad_semester'],
-                    grad_year=request.POST['grad_year'],
-                    major=request.POST['major'],
-                    school=School.objects.get(id=request.POST['school']),
-                    personal_picture=request.FILES.get(
-                        'personal_picture',
-                        'image-not-available.jpg'))
-                student.__dict__.update(auth_user.__dict__)
-                student.groups.add(student_users())
-                student.save()
-                return redirect('/projectTracker/studentlist/')
+                try:
+                    student = Student(
+                        baseuser_ptr_id=auth_user.id,
+                        grad_semester=request.POST['grad_semester'],
+                        grad_year=request.POST['grad_year'],
+                        major=request.POST['major'],
+                        school=School.objects.get(id=request.POST['school']),
+                        personal_picture=request.FILES.get(
+                            'personal_picture',
+                            'image-not-available.jpg'))
+                    student.__dict__.update(auth_user.__dict__)
+                    student.groups.add(student_users())
+                    student.save()
+                except IntegrityError:
+                    BaseUser.objects.get(username=request.POST['username']).delete()
+                else:
+                    return redirect('/projectTracker/studentlist/')
             else:
                 context['form'] = form
         else:
@@ -270,7 +274,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                if user.has_perm('projectTracker.has_project'):
+                if user.has_perm('projectTracker.has_project') and not user.is_superuser:
                     return redirect('my_project')
                 else:
                     return redirect('admin_list')
