@@ -9,6 +9,8 @@ class Project(models.Model):
     name = models.CharField(max_length=255, null=True)
     proposal = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    def __str__(self): 
+        return self.name
 
 
 class SchoolTeam(models.Model):
@@ -22,6 +24,8 @@ class SchoolTeam(models.Model):
     semester = models.CharField(max_length=255, blank=True)
     year = models.PositiveIntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    def __str__(self): 
+        return self.name
 
 
 class School(models.Model):
@@ -34,6 +38,8 @@ class School(models.Model):
     contact_email = models.EmailField()
     contact_phone = models.CharField(max_length=10, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    def __str__(self): 
+        return self.name
 
 
 class BaseUser(AbstractUser):
@@ -47,9 +53,14 @@ class Student(BaseUser):
 
     """Student - Information about a Student."""
 
+    SEMESTER_OPTIONS = (
+        ('FA', 'Fall'),
+        ('SP', 'Spring'),
+        ('SU', 'Summer')
+    )
     personal_picture = models.ImageField(
         upload_to='personal_pictures', blank=True)
-    grad_semester = models.CharField(max_length=255, blank=True)
+    grad_semester = models.CharField(max_length=2, choices=SEMESTER_OPTIONS)
     grad_year = models.PositiveIntegerField(blank=True)
     major = models.CharField(max_length=255, blank=True)
     school = models.ForeignKey('School')
@@ -57,6 +68,7 @@ class Student(BaseUser):
 
     class Meta:
         verbose_name = 'student'
+
 
 
 class Employee(BaseUser):
@@ -72,6 +84,7 @@ class Employee(BaseUser):
         verbose_name = 'employee'
 
 
+
 class Administrator(BaseUser):
 
     """Administrator - Information about Admin Users."""
@@ -81,6 +94,7 @@ class Administrator(BaseUser):
 
     class Meta:
         verbose_name = 'administrator'
+
 
 
 class Update(models.Model):
