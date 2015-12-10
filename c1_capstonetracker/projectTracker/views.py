@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, render_to_response
 
 from .forms import AdministratorForm, EmployeeForm, ProjectForm, SchoolForm
 from .forms import SchoolTeamForm, StudentForm, UpdateForm
@@ -94,7 +94,7 @@ def add_employee(request):
     if request.user.is_authenticated():
         context = {}
         if request.method == 'POST':
-            form = EmployeeForm(request.POST)
+            form = EmployeeForm(request.POST, request.FILES)
             if form.is_valid():
                 BaseUser.objects.create_user(
                     username=request.POST['username'],
@@ -323,5 +323,63 @@ def my_project(request):
                 team=teams[team]).order_by('-timestamp'))
         context['teams'] = teams
         return render(request, 'my_project.html', context)
+    else:
+        redirect('/')
+
+
+def edit_user(request):
+    """Allow the user to edit their profile"""
+    if request.user.is_authenticated():
+        user = request.user
+        print(user.id)
+        context = {}
+        if user.has_perm('projectTracker.has_student_profile'):
+            student = Student.objects.get(baseuser_ptr_id=user.id)
+            if request.method == 'POST':
+                form = StudentForm(request.POST, request.FILES, instance=student)
+                if form.is_valid():
+                    s = form.save(commit=False)
+                    s.set_password(request.POST['password'])
+                    s.last_name = request.POST['last_name']
+                    s.first_name = request.POST['first_name']
+                    s.username = request.POST['username']
+                    s.email = request.POST['email']
+                    s.phone = request.POST['phone']
+                    s.grad_year = request.POST['grad_year']
+                    s.grad_semester = request.POST['grad_semester']
+                    s.major = request.POST['major']
+                    s.school = School.objects.get(id=request.POST['school'])
+                    s.save()
+                    return redirect('my_project') 
+                else:
+                    context['form'] = form
+            else:
+                context['form'] = StudentForm(instance=student)
+            return render(request, 'edit_user.html', context)
+        if user.has_perm('projectTracker.has_employee_profile'):
+            employee = Employee.objects.get(baseuser_ptr_id=user.id)
+            if request.method == 'POST':
+                form = EmployeeForm(instance=employee)
+                if form.is_valid():
+                    form.save()
+                    return render(request, 'user_profile.html', context) 
+                else:
+                    context['form'] = form
+            else:
+                context['form'] = EmployeeForm(instance=employee)
+            return render(request, 'edit_user.html', context)
+        else:
+            admin = Administrator.objects.get(baseuser_ptr_id=user.id)
+            if request.method == 'POST':
+                form = AdministratorForm(instance=admin)
+                if form.is_valid():
+                    form.save()
+                    return render(request, 'user_profile.html', context) 
+                else:
+                    context['form'] = form
+            else:
+                context['form'] = EmployeeForm(instance=admin)
+            return render(request, 'edit_user.html', context)
+
     else:
         redirect('/')

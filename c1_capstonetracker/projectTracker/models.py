@@ -17,15 +17,19 @@ class SchoolTeam(models.Model):
 
     """SchoolTeam-- Information about a School team."""
 
+    SEMESTER_OPTIONS = (
+        ('FA', 'Fall'),
+        ('SP', 'Spring'),
+        ('SU', 'Summer')
+    )
     student_members = models.ManyToManyField('Student')
     employee_members = models.ManyToManyField('Employee')
     school = models.ForeignKey('School')
     project = models.ForeignKey('Project')
-    semester = models.CharField(max_length=255, blank=True)
+    semester = models.CharField(max_length=2, choices=SEMESTER_OPTIONS)
     year = models.PositiveIntegerField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    def __str__(self): 
-        return self.name
+
 
 
 class School(models.Model):
@@ -48,6 +52,9 @@ class BaseUser(AbstractUser):
 
     phone = models.CharField(max_length=10, blank=True)
 
+    def __str__(self): 
+        return self.first_name + " " + self.last_name
+
 
 class Student(BaseUser):
 
@@ -68,7 +75,6 @@ class Student(BaseUser):
 
     class Meta:
         verbose_name = 'student'
-
 
 
 class Employee(BaseUser):

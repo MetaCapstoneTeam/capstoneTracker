@@ -24,6 +24,31 @@ class StudentForm(ModelForm):
                   'password']
 
 
+"""class EditStudentForm(ModelForm):
+
+    Edit Student Form class.
+
+    def __init__(self, **kwargs):
+        self.first_name = kwargs.pop('first_name', None)
+        self.last_name = kwargs.pop('last_name', None)
+        super(EditStudentForm, self).__init__(**kwargs)
+
+    def save(self, commit=True):
+        obj = super(EditStudentForm, self).save(commit=False)
+        obj.first_name = self.first_name
+        obj.last_name = self.last_name
+        if commit:
+            obj.save()
+        return obj
+
+    class Meta:
+        model = Student
+        fields = ['first_name', 'last_name', 'email',
+                  'phone', 'personal_picture', 'grad_semester',
+                  'grad_year', 'major', 'school', 'username',
+                  'password']
+
+"""
 class EmployeeForm(ModelForm):
 
     """Employee Form class."""

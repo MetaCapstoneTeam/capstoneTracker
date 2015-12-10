@@ -4,6 +4,7 @@
 {% block content %}
 <div id ="content-wrapper">
     <h2 class="project-name">{{ user.first_name }}  {{ user.last_name }}</h2>
+    <!--<a href="{% url "edit_user" %}">Edit</a>-->
     <div class="project-divide">
     	{% if is_employee %}
             <img class="prof-pic" src="{{ user.employee.personal_picture.url }}">
@@ -15,7 +16,7 @@
          <h2 class="content-title">Username: </h2> {{ user.username }}
          <h2 class="content-title">Phone number: </h2> {{ user.phone }}
         {% if is_student %}
-            <h2 class="content-title">Expected Graduation: </h2> {{ user.student.grad_semester }} 
+            <h2 class="content-title">Expected Graduation: </h2> {{ user.student.get_grad_semester_display }} 
             {{ user.student.grad_year }}
             <h2 class="content-title">Major: </h2> {{ user.student.major }}
             <h2 class="content-title">School: </h2> {{ user.student.school.name }}

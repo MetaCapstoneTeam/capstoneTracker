@@ -33,7 +33,7 @@
                     {{ student.last_name }}, {{ student.first_name }}</td>
             <td>{{ student.school.name }}</td>
             <td>{{ student.major }}</td>
-            <td>{{ student.grad_semester }} {{ student.grad_year }}</td>
+            <td>{{ student.get_grad_semester_display }} {{ student.grad_year }}</td>
         </tr>
         {% endfor %}
     </tbody>    
