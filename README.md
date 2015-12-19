@@ -7,7 +7,7 @@
 * MySQL
 
 #### Windows
-# Be sure to add python34 and python34/Scripts to you PATH
+##### Be sure to add python34 and python34/Scripts to you PATH
 * Python 3.4
 * Pip
 * Virtualenv (pip install virtualenv)
@@ -26,11 +26,11 @@
 
 4. Go into you're local environment if not already there:
   	`$ workon capstone-project`
-    * (capstone-project) should appear at the start of your command prompt
+    <p>(capstone-project) should appear at the start of your command prompt
 
 5. Install all the requirements:
-	`$ cd c1_capstonetracker
-	`$ pip3 install -r requirements.txt
+	`$ cd c1_capstonetracker`
+	`$ pip3 install -r requirements.txt`
 
 6. Create local database
     `$ mysql -u root`
@@ -38,10 +38,10 @@
     `$ quit`
 
 7. Set up the database: (for windows do not include ./)
-  `$ ./manage.py syncdb`
-	`$ ./manage.py shell < create_groups.py`
-	`$ ./manage.py makemigrations`
-	`$ ./manage.py migrate`
+    `$ ./manage.py syncdb`
+	   `$ ./manage.py shell < create_groups.py`
+	    `$ ./manage.py makemigrations`
+	     `$ ./manage.py migrate`
 
 ## MySQL Notes
 * When creating the root account if asked to create a root password, you must
