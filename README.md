@@ -16,39 +16,39 @@
 
 ## Localhost Setup
 1. Clone the repository:
-   `$ git clone https://github.com/MetaCapstoneTeam/capstoneTracker.git capstone`
+   <p>`$ git clone https://github.com/MetaCapstoneTeam/capstoneTracker.git capstone`
 
 2. Navigate into capstone repo:
-   `$ cd capstone`
+   <p>`$ cd capstone`
 
 3. Create Virtual Environment Wrapper using Python 3.x:
-   `$ mkvirtualenv -p python3.4 capstone-project`
+   <p>`$ mkvirtualenv -p python3.4 capstone-project`
 
 4. Go into you're local environment if not already there:
-  	`$ workon capstone-project`
+  	<p>`$ workon capstone-project`
     <p>(capstone-project) should appear at the start of your command prompt
 
 5. Install all the requirements:
-	`$ cd c1_capstonetracker`
-	`$ pip3 install -r requirements.txt`
+	<p>`$ cd c1_capstonetracker`
+	<p>`$ pip3 install -r requirements.txt`
 
 6. Create local database
-    `$ mysql -u root`
-    `$ create database capitalonecapstone;`
-    `$ quit`
+    <p>`$ mysql -u root`
+    <p>`$ create database capitalonecapstone;`
+    <p>`$ quit`
 
 7. Set up the database: (for windows do not include ./)
-    `$ ./manage.py syncdb`
-	   `$ ./manage.py shell < create_groups.py`
-	    `$ ./manage.py makemigrations`
-	     `$ ./manage.py migrate`
+    <p>`$ ./manage.py syncdb`
+	  <p>`$ ./manage.py shell < create_groups.py`
+	  <p>`$ ./manage.py makemigrations`
+	  <p>`$ ./manage.py migrate`
 
 ## MySQL Notes
 * When creating the root account if asked to create a root password, you must
  remove the root password in order to run the syncdb and migrations call.
-  `$ mysql -u root -p`
-  enter your password
-  `SET PASSWORD FOR root@localhost=PASSWORD('');`
+  <p>`$ mysql -u root -p`
+  <p>enter your password
+  <p>`SET PASSWORD FOR root@localhost=PASSWORD('');`
 
 ## Adding code
 Once you have completed your additions to files run the make file to check if your
