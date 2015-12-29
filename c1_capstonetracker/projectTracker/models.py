@@ -9,7 +9,9 @@ class Project(models.Model):
     name = models.CharField(max_length=255, null=True)
     proposal = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    def __str__(self): 
+
+    def __str__(self):
+        """return the name of a project."""
         return self.name
 
 
@@ -31,7 +33,6 @@ class SchoolTeam(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
 
-
 class School(models.Model):
 
     """School - Information about a School."""
@@ -42,7 +43,9 @@ class School(models.Model):
     contact_email = models.EmailField()
     contact_phone = models.CharField(max_length=10, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-    def __str__(self): 
+
+    def __str__(self):
+        """return the name of a school."""
         return self.name
 
 
@@ -52,7 +55,8 @@ class BaseUser(AbstractUser):
 
     phone = models.CharField(max_length=10, blank=True)
 
-    def __str__(self): 
+    def __str__(self):
+        """Return the first and last name of a user."""
         return self.first_name + " " + self.last_name
 
 
@@ -90,7 +94,6 @@ class Employee(BaseUser):
         verbose_name = 'employee'
 
 
-
 class Administrator(BaseUser):
 
     """Administrator - Information about Admin Users."""
@@ -100,7 +103,6 @@ class Administrator(BaseUser):
 
     class Meta:
         verbose_name = 'administrator'
-
 
 
 class Update(models.Model):

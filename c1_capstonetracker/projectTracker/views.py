@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render
 
 from .forms import AdministratorForm, EmployeeForm, ProjectForm, SchoolForm
 from .forms import SchoolTeamForm, StudentForm, UpdateForm
@@ -155,7 +155,8 @@ def add_student(request):
                     student.groups.add(student_users())
                     student.save()
                 except IntegrityError:
-                    BaseUser.objects.get(username=request.POST['username']).delete()
+                    BaseUser.objects.get(
+                        username=request.POST['username']).delete()
                 else:
                     return redirect('/projectTracker/studentlist/')
             else:
@@ -274,8 +275,9 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                if user.has_perm('projectTracker.has_project') and not user.is_superuser:
-                    return redirect('my_project')
+                if user.has_perm('projectTracker.has_project'):
+                    if not user.is_superuser:
+                        return redirect('my_project')
                 else:
                     return redirect('admin_list')
             else:
@@ -328,7 +330,7 @@ def my_project(request):
 
 
 def edit_user(request):
-    """Allow the user to edit their profile"""
+    """Allow the user to edit their profile."""
     if request.user.is_authenticated():
         user = request.user
         print(user.id)
@@ -336,7 +338,10 @@ def edit_user(request):
         if user.has_perm('projectTracker.has_student_profile'):
             student = Student.objects.get(baseuser_ptr_id=user.id)
             if request.method == 'POST':
-                form = StudentForm(request.POST, request.FILES, instance=student)
+                form = StudentForm(
+                    request.POST,
+                    request.FILES,
+                    instance=student)
                 if form.is_valid():
                     s = form.save(commit=False)
                     s.set_password(request.POST['password'])
@@ -350,7 +355,7 @@ def edit_user(request):
                     s.major = request.POST['major']
                     s.school = School.objects.get(id=request.POST['school'])
                     s.save()
-                    return redirect('my_project') 
+                    return redirect('my_project')
                 else:
                     context['form'] = form
             else:
@@ -362,7 +367,7 @@ def edit_user(request):
                 form = EmployeeForm(instance=employee)
                 if form.is_valid():
                     form.save()
-                    return render(request, 'user_profile.html', context) 
+                    return render(request, 'user_profile.html', context)
                 else:
                     context['form'] = form
             else:
@@ -374,12 +379,11 @@ def edit_user(request):
                 form = AdministratorForm(instance=admin)
                 if form.is_valid():
                     form.save()
-                    return render(request, 'user_profile.html', context) 
+                    return render(request, 'user_profile.html', context)
                 else:
                     context['form'] = form
             else:
                 context['form'] = EmployeeForm(instance=admin)
             return render(request, 'edit_user.html', context)
-
     else:
         redirect('/')
