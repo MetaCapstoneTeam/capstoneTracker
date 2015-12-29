@@ -1,0 +1,11 @@
+Important Things to Add:
+  *The ability to edit users.
+    We started on that functionality but ran out of time. But we think that the user should be able to edit their own profile.
+    They should have the ability to change their personal attributes and update them as they please.
+  *The ability to remove users.
+    The admins should be able to remove whole rows from the lists and also be able to edit them.
+  *Automatic password, and changing passwords:
+    When a user is created there should be a password created for them instead of the admin entering this password.
+    this should be emailed to the email address given when creating the user. and when the user logs in they should be able to change their password.
+  *Chatting ability
+    Having some sort of chat, or messenger system that enables employees and students to leave messages or chat with each other.
